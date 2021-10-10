@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hs.mapper.WatchMapper" >
+  <resultMap id="BaseResultMap" type="com.hs.model.Watch" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="watchname" property="watchname" jdbcType="VARCHAR" />
+    <result column="brand" property="brand" jdbcType="INTEGER" />
+    <result column="type" property="type" jdbcType="INTEGER" />
+    <result column="fixprice" property="fixprice" jdbcType="INTEGER" />
+    <result column="status" property="status" jdbcType="INTEGER" />
+    <result column="user_address" property="userAddress" jdbcType="VARCHAR" />
+    <result column="user_name" property="userName" jdbcType="VARCHAR" />
+    <result column="user_tel" property="userTel" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, watchname, brand, type, fixprice, status, user_address, user_name, user_tel
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from watch
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <!--根据腕表名称查询腕表信息-->
+  <select id="selectByWatchname" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select
+    <include refid="Base_Column_List" />
+    from watch
+    where watchname = #{watchname}
+  </select>
+
+  <!--根据条件查询腕表信息-->
+  <select id="selectByKeys" resultType="map" parameterType="map" >
+    select
+    t1.id,t1.watchname,t1.fixprice,t1.status,t1.user_address useraddress,t1.user_name username,t1.user_tel usertel,t2.type_name typename,t3.brand_name brandname
+    from watch t1 left join type t2 on t1.type=t2.id
+    left join brand t3 on t1.brand=t3.id
+    where 1=1
+    <if test="watchname!=null and watchname!=''">
+      and t1.watchname like '%${watchname}%'
+    </if>
+    <if test="typeId!=null and typeId>0">
+      and t1.type =#{typeId}
+    </if>
+    <if test="brandId!=null and brandId>0">
+      and t1.brand =#{brandId}
+    </if>
+    order by t1.id desc
+  </select>
+  <!--根据id查询腕表信息-->
+  <select id="selectById" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select
+    <include refid="Base_Column_List" />
+    from watch
+    where id = #{id}
+  </select>
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from watch
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.hs.model.Watch" >
+    insert into watch (id, watchname, brand,
+      type, fixprice, status, 
+      user_address, user_name, user_tel
+      )
+    values (#{id,jdbcType=INTEGER}, #{watchname,jdbcType=VARCHAR}, #{brand,jdbcType=INTEGER},
+      #{type,jdbcType=INTEGER}, #{fixprice,jdbcType=INTEGER}, #{status,jdbcType=INTEGER}, 
+      #{userAddress,jdbcType=VARCHAR}, #{userName,jdbcType=VARCHAR}, #{userTel,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.hs.model.Watch" >
+    insert into watch
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="watchname != null" >
+        watchname,
+      </if>
+      <if test="brand != null" >
+        brand,
+      </if>
+      <if test="type != null" >
+        type,
+      </if>
+      <if test="fixprice != null" >
+        fixprice,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="userAddress != null" >
+        user_address,
+      </if>
+      <if test="userName != null" >
+        user_name,
+      </if>
+      <if test="userTel != null" >
+        user_tel,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="watchname != null" >
+        #{watchname,jdbcType=VARCHAR},
+      </if>
+      <if test="brand != null" >
+        #{brand,jdbcType=INTEGER},
+      </if>
+      <if test="type != null" >
+        #{type,jdbcType=INTEGER},
+      </if>
+      <if test="fixprice != null" >
+        #{fixprice,jdbcType=INTEGER},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="userAddress != null" >
+        #{userAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="userName != null" >
+        #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="userTel != null" >
+        #{userTel,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hs.model.Watch" >
+    update watch
+    <set >
+      <if test="watchname != null" >
+        watchname = #{watchname,jdbcType=VARCHAR},
+      </if>
+      <if test="brand != null" >
+        brand = #{brand,jdbcType=INTEGER},
+      </if>
+      <if test="type != null" >
+        type = #{type,jdbcType=INTEGER},
+      </if>
+      <if test="fixprice != null" >
+        fixprice = #{fixprice,jdbcType=INTEGER},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="userAddress != null" >
+        user_address = #{userAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="userName != null" >
+        user_name = #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="userTel != null" >
+        user_tel = #{userTel,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hs.model.Watch" >
+    update watch
+    set watchname = #{watchname,jdbcType=VARCHAR},
+      brand = #{brand,jdbcType=INTEGER},
+      type = #{type,jdbcType=INTEGER},
+      fixprice = #{fixprice,jdbcType=INTEGER},
+      status = #{status,jdbcType=INTEGER},
+      user_address = #{userAddress,jdbcType=VARCHAR},
+      user_name = #{userName,jdbcType=VARCHAR},
+      user_tel = #{userTel,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

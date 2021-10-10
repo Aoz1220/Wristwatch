@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hs.mapper.TbSysTownMapper" >
+  <resultMap id="BaseResultMap" type="com.hs.model.TbSysTown" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="town_name" property="townName" jdbcType="VARCHAR" />
+    <result column="region_id" property="regionId" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, town_name, region_id
+  </sql>
+  <select id="selectAllTown" resultMap="BaseResultMap"  >
+    select
+    <include refid="Base_Column_List" />
+    from tb_sys_town
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from tb_sys_town
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <!--根据行政区查询镇（街道）-->
+  <select id="selectByRegionId" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select
+    <include refid="Base_Column_List" />
+    from tb_sys_town
+    where region_id = #{regionId,jdbcType=INTEGER}
+  </select>
+  <!--根据区名称查询所辖街道-->
+  <select id="selectByRegionName" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select
+     t1.id, t1.town_name, t1.region_id
+    from tb_sys_town t1 left join tb_sys_region t2 on t1.region_id=t2.id
+    where t2.region_name = #{regionName}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from tb_sys_town
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.hs.model.TbSysTown" >
+    insert into tb_sys_town (id, town_name, region_id
+      )
+    values (#{id,jdbcType=INTEGER}, #{townName,jdbcType=VARCHAR}, #{regionId,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.hs.model.TbSysTown" >
+    insert into tb_sys_town
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="townName != null" >
+        town_name,
+      </if>
+      <if test="regionId != null" >
+        region_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="townName != null" >
+        #{townName,jdbcType=VARCHAR},
+      </if>
+      <if test="regionId != null" >
+        #{regionId,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hs.model.TbSysTown" >
+    update tb_sys_town
+    <set >
+      <if test="townName != null" >
+        town_name = #{townName,jdbcType=VARCHAR},
+      </if>
+      <if test="regionId != null" >
+        region_id = #{regionId,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hs.model.TbSysTown" >
+    update tb_sys_town
+    set town_name = #{townName,jdbcType=VARCHAR},
+      region_id = #{regionId,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
