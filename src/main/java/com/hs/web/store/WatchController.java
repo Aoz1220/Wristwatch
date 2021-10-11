@@ -174,4 +174,55 @@ public class WatchController {
             return "error";
         }
     }
+
+    /**
+     * 下放到维修厂
+     * @param ids
+     * @return
+     */
+    @RequestMapping("/push/factory")
+    @ResponseBody
+    public Map pushFactory(Integer[] ids){
+        Map map=new HashMap();
+        //判断在维修审核或已在维修厂
+        List<Integer> list=watchService.getWatchCannotPush(ids);
+        Integer[] array=new Integer[ids.length-list.size()];
+        int index=0;
+        for(int i=0;i<ids.length;i++){
+            if(list.contains(ids[i])){
+                continue;
+            }
+            array[index]=ids[i];
+            index++;
+
+        }
+        if(array.length!=0){
+            int result=watchService.updateWatchForPushFactory(array);
+            if(result>0){
+                map.put("msg","成功下放"+array.length+"块腕表到修理厂，"+list.size()+"块腕表仍在维修审核或已在维修厂");
+                map.put("code","ok");
+                return map;
+            }
+            map.put("code","error");
+            return map;
+        }
+        map.put("msg",list.size()+"块腕表仍在维修审核或已在维修厂");
+        map.put("code","question");
+        return map;
+    }
+    /**
+     * 下放到维修厂
+     * @param ids
+     * @return
+     */
+    @RequestMapping("/watch/check")
+    @ResponseBody
+    public String checkWatch(Integer id){
+        int result=watchService.checkWatch(id);
+        if(result==1) {
+            return "ok";
+        }else {
+            return "error";
+        }
+    }
 }

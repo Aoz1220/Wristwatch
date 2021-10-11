@@ -24,4 +24,6 @@ public interface UserService {
     public int updateUser(User user);
 
     public int updateUserPassword(User user);
+
+    public List<Brand> getBrandByTypeId(Integer typeId);
 }

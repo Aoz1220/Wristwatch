@@ -9,18 +9,565 @@
     <option name="autoReloadType" value="ALL" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9dfb1917-6704-481c-8b6b-548064eb81df" name="Default" comment="first" />
+    <list default="true" id="9dfb1917-6704-481c-8b6b-548064eb81df" name="Default" comment="logn1.1">
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/hs/common/Constants.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/hs/converter/StatusConverter.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/hs/converter/TypeConverter.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/hs/service/BaseDictService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/hs/service/MenuService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/hs/service/RegionService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/hs/service/ResidentService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/hs/service/RoleService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/hs/service/WatchService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/hs/shiro/UserRealm.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/hs/utils/Constants.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/hs/utils/ExcelUtils.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/hs/utils/MD5Utils.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/hs/utils/MybatisGenerator.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/hs/web/manager/UserController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/hs/web/store/WatchController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/page/factory/watch-list-going.jsp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/page/factory/watch-list-history.jsp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/page/factory/watch-list-waiting.jsp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/page/manager/user-add.jsp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/page/manager/user-edit.jsp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/page/manager/user-list.jsp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/page/watch/watch-add.jsp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/page/watch/watch-edit.jsp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/page/watch/watch-list.jsp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/page/watch/watch-refuse.jsp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/com/hs/common/Constants.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/com/hs/converter/GenderConverter.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/com/hs/converter/NucleinResultConverter.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/com/hs/converter/StatusConverter.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/com/hs/converter/TypeConverter.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/com/hs/mapper/BaseDictMapper.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/com/hs/mapper/BrandMapper.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/com/hs/mapper/MenuMapper.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/com/hs/mapper/RoleMapper.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/com/hs/mapper/RoleMenuMapper.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/com/hs/mapper/TbIsolationCentralMapper.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/com/hs/mapper/TbIsolationHomeMapper.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/com/hs/mapper/TbResidentInfoMapper.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/com/hs/mapper/TbSysIsolationMapper.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/com/hs/mapper/TbSysRegionMapper.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/com/hs/mapper/TbSysTownMapper.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/com/hs/mapper/TypeMapper.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/com/hs/mapper/UserMapper.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/com/hs/mapper/WatchMapper.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/com/hs/model/BaseDict.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/com/hs/model/Brand.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/com/hs/model/Menu.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/com/hs/model/Role.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/com/hs/model/RoleMenu.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/com/hs/model/TbIsolationCentral.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/com/hs/model/TbIsolationHome.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/com/hs/model/TbResidentInfo.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/com/hs/model/TbSysIsolation.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/com/hs/model/TbSysRegion.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/com/hs/model/TbSysTown.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/com/hs/model/Type.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/com/hs/model/User.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/com/hs/model/Watch.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/com/hs/service/BaseDictService.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/com/hs/service/MenuService.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/com/hs/service/RegionService.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/com/hs/service/ResidentService.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/com/hs/service/RoleService.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/com/hs/service/UserService.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/com/hs/service/WatchService.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/com/hs/service/impl/BaseDictServiceImpl.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/com/hs/service/impl/MenuServiceImpl.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/com/hs/service/impl/RegionServiceImpl.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/com/hs/service/impl/ResidentServiceImpl.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/com/hs/service/impl/RoleServiceImpl.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/com/hs/service/impl/UserServiceImpl.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/com/hs/service/impl/WatchServiceImpl.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/com/hs/shiro/UserRealm.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/com/hs/utils/Constants.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/com/hs/utils/ExcelUtils.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/com/hs/utils/MD5Utils.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/com/hs/utils/MybatisGenerator.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/com/hs/utils/SessionUtil.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/com/hs/web/CaptchaController.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/com/hs/web/IndexController.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/com/hs/web/LoginController.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/com/hs/web/manager/UserController.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/com/hs/web/store/WatchController.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/common.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/jdbc.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/log4j.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/mapper/BaseDictMapper.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/mapper/BrandMapper.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/mapper/MenuMapper.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/mapper/RoleMapper.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/mapper/RoleMenuMapper.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/mapper/TypeMapper.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/mapper/UserMapper.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/mapper/WatchMapper.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/mybatis/mybatis-generator.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/spring/spring-web.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/spring/springcontext-dao.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/spring/springcontext-service.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/spring/springcontext-shiro.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/spring.log" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/META-INF/MANIFEST.MF" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/WEB-INF/classes/WEB-INF/page/customer-add.jsp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/WEB-INF/classes/WEB-INF/page/customer-edit.jsp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/WEB-INF/classes/WEB-INF/page/customer-list.jsp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/WEB-INF/classes/WEB-INF/page/index.jsp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/WEB-INF/classes/WEB-INF/page/login.jsp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/WEB-INF/classes/WEB-INF/page/manager/user-add.jsp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/WEB-INF/classes/WEB-INF/page/manager/user-edit.jsp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/WEB-INF/classes/WEB-INF/page/manager/user-list.jsp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/WEB-INF/classes/WEB-INF/page/region/isolation-select.jsp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/WEB-INF/classes/WEB-INF/page/region/resident-add.jsp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/WEB-INF/classes/WEB-INF/page/region/resident-edit.jsp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/WEB-INF/classes/WEB-INF/page/region/resident-list.jsp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/WEB-INF/classes/WEB-INF/page/town/resident-list-going.jsp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/WEB-INF/classes/WEB-INF/page/town/resident-list-history.jsp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/WEB-INF/classes/WEB-INF/page/town/resident-list-waiting.jsp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/WEB-INF/classes/WEB-INF/web.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/WEB-INF/classes/api/clear.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/WEB-INF/classes/api/init.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/WEB-INF/classes/api/menus.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/WEB-INF/classes/api/table.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/WEB-INF/classes/api/tableSelect.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/WEB-INF/classes/api/upload.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/WEB-INF/classes/base.jsp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/WEB-INF/classes/com/hs/common/Constants.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/WEB-INF/classes/com/hs/converter/GenderConverter.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/WEB-INF/classes/com/hs/converter/NucleinResultConverter.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/WEB-INF/classes/com/hs/converter/StatusConverter.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/WEB-INF/classes/com/hs/converter/TypeConverter.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/WEB-INF/classes/com/hs/mapper/BaseDictMapper.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/WEB-INF/classes/com/hs/mapper/BrandMapper.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/WEB-INF/classes/com/hs/mapper/MenuMapper.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/WEB-INF/classes/com/hs/mapper/RoleMapper.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/WEB-INF/classes/com/hs/mapper/RoleMenuMapper.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/WEB-INF/classes/com/hs/mapper/TbIsolationCentralMapper.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/WEB-INF/classes/com/hs/mapper/TbIsolationHomeMapper.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/WEB-INF/classes/com/hs/mapper/TbResidentInfoMapper.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/WEB-INF/classes/com/hs/mapper/TbSysIsolationMapper.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/WEB-INF/classes/com/hs/mapper/TbSysRegionMapper.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/WEB-INF/classes/com/hs/mapper/TbSysTownMapper.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/WEB-INF/classes/com/hs/mapper/TypeMapper.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/WEB-INF/classes/com/hs/mapper/UserMapper.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/WEB-INF/classes/com/hs/mapper/WatchMapper.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/WEB-INF/classes/com/hs/model/BaseDict.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/WEB-INF/classes/com/hs/model/Brand.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/WEB-INF/classes/com/hs/model/Menu.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/WEB-INF/classes/com/hs/model/Role.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/WEB-INF/classes/com/hs/model/RoleMenu.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/WEB-INF/classes/com/hs/model/TbIsolationCentral.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/WEB-INF/classes/com/hs/model/TbIsolationHome.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/WEB-INF/classes/com/hs/model/TbResidentInfo.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/WEB-INF/classes/com/hs/model/TbSysIsolation.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/WEB-INF/classes/com/hs/model/TbSysRegion.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/WEB-INF/classes/com/hs/model/TbSysTown.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/WEB-INF/classes/com/hs/model/Type.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/WEB-INF/classes/com/hs/model/User.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/WEB-INF/classes/com/hs/model/Watch.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/WEB-INF/classes/com/hs/service/BaseDictService.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/WEB-INF/classes/com/hs/service/MenuService.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/WEB-INF/classes/com/hs/service/RegionService.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/WEB-INF/classes/com/hs/service/ResidentService.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/WEB-INF/classes/com/hs/service/RoleService.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/WEB-INF/classes/com/hs/service/UserService.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/WEB-INF/classes/com/hs/service/WatchService.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/WEB-INF/classes/com/hs/service/impl/BaseDictServiceImpl.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/WEB-INF/classes/com/hs/service/impl/MenuServiceImpl.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/WEB-INF/classes/com/hs/service/impl/RegionServiceImpl.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/WEB-INF/classes/com/hs/service/impl/ResidentServiceImpl.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/WEB-INF/classes/com/hs/service/impl/RoleServiceImpl.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/WEB-INF/classes/com/hs/service/impl/UserServiceImpl.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/WEB-INF/classes/com/hs/service/impl/WatchServiceImpl.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/WEB-INF/classes/com/hs/shiro/UserRealm.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/WEB-INF/classes/com/hs/utils/Constants.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/WEB-INF/classes/com/hs/utils/ExcelUtils.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/WEB-INF/classes/com/hs/utils/MD5Utils.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/WEB-INF/classes/com/hs/utils/MybatisGenerator.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/WEB-INF/classes/com/hs/utils/SessionUtil.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/WEB-INF/classes/com/hs/web/CaptchaController.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/WEB-INF/classes/com/hs/web/IndexController.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/WEB-INF/classes/com/hs/web/LoginController.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/WEB-INF/classes/com/hs/web/manager/UserController.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/WEB-INF/classes/com/hs/web/store/WatchController.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/WEB-INF/classes/common.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/WEB-INF/classes/css/layuimini.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/WEB-INF/classes/css/public.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/WEB-INF/classes/css/themes/default.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/WEB-INF/classes/excel_template/residentInfo-template.xlsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/WEB-INF/classes/images/bg.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/WEB-INF/classes/images/captcha.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/WEB-INF/classes/images/donate_qrcode.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/WEB-INF/classes/images/favicon.ico" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/WEB-INF/classes/images/home.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/WEB-INF/classes/images/icon-login.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/WEB-INF/classes/images/loginbg.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/WEB-INF/classes/images/logo.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/WEB-INF/classes/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/WEB-INF/classes/jdbc.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/WEB-INF/classes/js/lay-config.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/WEB-INF/classes/js/lay-module/echarts/echarts.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/WEB-INF/classes/js/lay-module/echarts/echartsTheme.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/WEB-INF/classes/js/lay-module/iconPicker/iconPickerFa.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/WEB-INF/classes/js/lay-module/layarea/layarea.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/WEB-INF/classes/js/lay-module/layuimini/miniAdmin.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/WEB-INF/classes/js/lay-module/layuimini/miniMenu.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/WEB-INF/classes/js/lay-module/layuimini/miniTab.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/WEB-INF/classes/js/lay-module/layuimini/miniTheme.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/WEB-INF/classes/js/lay-module/layuimini/miniTongji.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/WEB-INF/classes/js/lay-module/step-lay/step.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/WEB-INF/classes/js/lay-module/step-lay/step.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/WEB-INF/classes/js/lay-module/tableSelect/tableSelect.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/WEB-INF/classes/js/lay-module/treetable-lay/treetable.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/WEB-INF/classes/js/lay-module/treetable-lay/treetable.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/WEB-INF/classes/js/lay-module/wangEditor/fonts/w-e-icon.woff" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/WEB-INF/classes/js/lay-module/wangEditor/wangEditor.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/WEB-INF/classes/js/lay-module/wangEditor/wangEditor.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/WEB-INF/classes/js/lay-module/wangEditor/wangEditor.min.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/WEB-INF/classes/js/lay-module/wangEditor/wangEditor.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/WEB-INF/classes/js/lay-module/wangEditor/wangEditor.min.js.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/WEB-INF/classes/lib/font-awesome-4.7.0/HELP-US-OUT.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/WEB-INF/classes/lib/font-awesome-4.7.0/css/font-awesome.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/WEB-INF/classes/lib/font-awesome-4.7.0/css/font-awesome.min.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/WEB-INF/classes/lib/font-awesome-4.7.0/fonts/FontAwesome.otf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/WEB-INF/classes/lib/font-awesome-4.7.0/fonts/fontawesome-webfont.eot" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/WEB-INF/classes/lib/font-awesome-4.7.0/fonts/fontawesome-webfont.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/WEB-INF/classes/lib/font-awesome-4.7.0/fonts/fontawesome-webfont.ttf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/WEB-INF/classes/lib/font-awesome-4.7.0/fonts/fontawesome-webfont.woff" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/WEB-INF/classes/lib/font-awesome-4.7.0/fonts/fontawesome-webfont.woff2" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/WEB-INF/classes/lib/font-awesome-4.7.0/less/animated.less" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/WEB-INF/classes/lib/font-awesome-4.7.0/less/bordered-pulled.less" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/WEB-INF/classes/lib/font-awesome-4.7.0/less/core.less" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/WEB-INF/classes/lib/font-awesome-4.7.0/less/fixed-width.less" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/WEB-INF/classes/lib/font-awesome-4.7.0/less/font-awesome.less" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/WEB-INF/classes/lib/font-awesome-4.7.0/less/icons.less" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/WEB-INF/classes/lib/font-awesome-4.7.0/less/larger.less" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/WEB-INF/classes/lib/font-awesome-4.7.0/less/list.less" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/WEB-INF/classes/lib/font-awesome-4.7.0/less/mixins.less" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/WEB-INF/classes/lib/font-awesome-4.7.0/less/path.less" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/WEB-INF/classes/lib/font-awesome-4.7.0/less/rotated-flipped.less" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/WEB-INF/classes/lib/font-awesome-4.7.0/less/screen-reader.less" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/WEB-INF/classes/lib/font-awesome-4.7.0/less/stacked.less" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/WEB-INF/classes/lib/font-awesome-4.7.0/less/variables.less" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/WEB-INF/classes/lib/font-awesome-4.7.0/scss/_animated.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/WEB-INF/classes/lib/font-awesome-4.7.0/scss/_bordered-pulled.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/WEB-INF/classes/lib/font-awesome-4.7.0/scss/_core.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/WEB-INF/classes/lib/font-awesome-4.7.0/scss/_fixed-width.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/WEB-INF/classes/lib/font-awesome-4.7.0/scss/_icons.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/WEB-INF/classes/lib/font-awesome-4.7.0/scss/_larger.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/WEB-INF/classes/lib/font-awesome-4.7.0/scss/_list.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/WEB-INF/classes/lib/font-awesome-4.7.0/scss/_mixins.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/WEB-INF/classes/lib/font-awesome-4.7.0/scss/_path.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/WEB-INF/classes/lib/font-awesome-4.7.0/scss/_rotated-flipped.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/WEB-INF/classes/lib/font-awesome-4.7.0/scss/_screen-reader.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/WEB-INF/classes/lib/font-awesome-4.7.0/scss/_stacked.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/WEB-INF/classes/lib/font-awesome-4.7.0/scss/_variables.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/WEB-INF/classes/lib/font-awesome-4.7.0/scss/font-awesome.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/WEB-INF/classes/lib/jq-module/jquery.particleground.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/WEB-INF/classes/lib/jq-module/paigusu.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/WEB-INF/classes/lib/jq-module/zyupload/zyupload-1.0.0.min.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/WEB-INF/classes/lib/jq-module/zyupload/zyupload-1.0.0.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/WEB-INF/classes/lib/jquery-3.4.1/jquery-3.4.1.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/WEB-INF/classes/lib/layui-v2.6.3/css/layui.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/WEB-INF/classes/lib/layui-v2.6.3/css/modules/code.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/WEB-INF/classes/lib/layui-v2.6.3/css/modules/laydate/default/laydate.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/WEB-INF/classes/lib/layui-v2.6.3/css/modules/layer/default/icon-ext.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/WEB-INF/classes/lib/layui-v2.6.3/css/modules/layer/default/icon.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/WEB-INF/classes/lib/layui-v2.6.3/css/modules/layer/default/layer.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/WEB-INF/classes/lib/layui-v2.6.3/css/modules/layer/default/loading-0.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/WEB-INF/classes/lib/layui-v2.6.3/css/modules/layer/default/loading-1.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/WEB-INF/classes/lib/layui-v2.6.3/css/modules/layer/default/loading-2.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/WEB-INF/classes/lib/layui-v2.6.3/font/iconfont.eot" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/WEB-INF/classes/lib/layui-v2.6.3/font/iconfont.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/WEB-INF/classes/lib/layui-v2.6.3/font/iconfont.ttf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/WEB-INF/classes/lib/layui-v2.6.3/font/iconfont.woff" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/WEB-INF/classes/lib/layui-v2.6.3/font/iconfont.woff2" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/WEB-INF/classes/lib/layui-v2.6.3/layui.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/WEB-INF/classes/log4j.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/WEB-INF/classes/mapper/BaseDictMapper.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/WEB-INF/classes/mapper/BrandMapper.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/WEB-INF/classes/mapper/MenuMapper.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/WEB-INF/classes/mapper/RoleMapper.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/WEB-INF/classes/mapper/RoleMenuMapper.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/WEB-INF/classes/mapper/TbSysTownMapper.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/WEB-INF/classes/mapper/TypeMapper.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/WEB-INF/classes/mapper/UserMapper.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/WEB-INF/classes/mapper/WatchMapper.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/WEB-INF/classes/mybatis/mybatis-generator.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/WEB-INF/classes/page/404.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/WEB-INF/classes/page/area.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/WEB-INF/classes/page/button.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/WEB-INF/classes/page/color-select.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/WEB-INF/classes/page/editor.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/WEB-INF/classes/page/form-step.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/WEB-INF/classes/page/form.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/WEB-INF/classes/page/icon-picker.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/WEB-INF/classes/page/icon.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/WEB-INF/classes/page/layer.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/WEB-INF/classes/page/login-1.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/WEB-INF/classes/page/login-2.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/WEB-INF/classes/page/login-3.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/WEB-INF/classes/page/menu.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/WEB-INF/classes/page/setting.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/WEB-INF/classes/page/table-select.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/WEB-INF/classes/page/table.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/WEB-INF/classes/page/table/add.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/WEB-INF/classes/page/table/edit.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/WEB-INF/classes/page/upload.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/WEB-INF/classes/page/user-password.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/WEB-INF/classes/page/user-setting.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/WEB-INF/classes/page/welcome-1.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/WEB-INF/classes/page/welcome-2.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/WEB-INF/classes/page/welcome-3.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/WEB-INF/classes/spring/spring-web.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/WEB-INF/classes/spring/springcontext-dao.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/WEB-INF/classes/spring/springcontext-service.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/WEB-INF/classes/spring/springcontext-shiro.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/WEB-INF/lib/FastInfoset-1.2.15.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/WEB-INF/lib/activation-1.1.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/WEB-INF/lib/asm-4.2.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/WEB-INF/lib/aspectjweaver-1.8.2.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/WEB-INF/lib/cglib-3.1.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/WEB-INF/lib/classmate-1.1.0.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/WEB-INF/lib/commons-beanutils-1.9.3.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/WEB-INF/lib/commons-codec-1.6.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/WEB-INF/lib/commons-collections-3.2.2.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/WEB-INF/lib/commons-collections4-4.1.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/WEB-INF/lib/commons-fileupload-1.3.1.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/WEB-INF/lib/commons-io-2.2.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/WEB-INF/lib/commons-lang-2.6.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/WEB-INF/lib/commons-logging-1.1.1.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/WEB-INF/lib/curvesapi-1.04.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/WEB-INF/lib/druid-1.0.13.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/WEB-INF/lib/easyexcel-2.1.6.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/WEB-INF/lib/ehcache-3.7.1.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/WEB-INF/lib/fastjson-1.2.7.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/WEB-INF/lib/filters-2.0.235-1.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/WEB-INF/lib/hibernate-validator-5.2.4.Final.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/WEB-INF/lib/httpclient-4.2.1.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/WEB-INF/lib/httpcore-4.2.1.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/WEB-INF/lib/istack-commons-runtime-3.0.7.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/WEB-INF/lib/jackson-annotations-2.5.0.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/WEB-INF/lib/jackson-core-2.5.1.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/WEB-INF/lib/jackson-databind-2.5.1.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/WEB-INF/lib/javaee-api-8.0.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/WEB-INF/lib/javax.activation-api-1.2.0.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/WEB-INF/lib/javax.mail-1.6.0.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/WEB-INF/lib/javax.servlet-api-3.1.0.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/WEB-INF/lib/javax.servlet.jsp.jstl-1.2.2.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/WEB-INF/lib/jaxb-api-2.3.1.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/WEB-INF/lib/jaxb-runtime-2.3.1.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/WEB-INF/lib/jboss-logging-3.2.1.Final.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/WEB-INF/lib/jconsole.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/WEB-INF/lib/jsp-api-2.1.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/WEB-INF/lib/jsqlparser-0.9.5.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/WEB-INF/lib/jstl-api-1.2.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/WEB-INF/lib/kaptcha-2.3.2.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/WEB-INF/lib/log4j-1.2.17.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/WEB-INF/lib/mybatis-3.2.8.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/WEB-INF/lib/mybatis-generator-core-1.3.2.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/WEB-INF/lib/mybatis-spring-1.2.2.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/WEB-INF/lib/mysql-connector-java-8.0.17.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/WEB-INF/lib/pagehelper-4.1.6.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/WEB-INF/lib/poi-3.17.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/WEB-INF/lib/poi-ooxml-3.17.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/WEB-INF/lib/poi-ooxml-schemas-3.17.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/WEB-INF/lib/protobuf-java-3.6.1.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/WEB-INF/lib/servlet-api-2.5.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/WEB-INF/lib/shiro-cache-1.4.2.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/WEB-INF/lib/shiro-config-core-1.4.2.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/WEB-INF/lib/shiro-config-ogdl-1.4.2.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/WEB-INF/lib/shiro-core-1.4.2.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/WEB-INF/lib/shiro-crypto-cipher-1.4.2.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/WEB-INF/lib/shiro-crypto-core-1.4.2.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/WEB-INF/lib/shiro-crypto-hash-1.4.2.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/WEB-INF/lib/shiro-event-1.4.2.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/WEB-INF/lib/shiro-lang-1.4.2.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/WEB-INF/lib/shiro-spring-1.4.2.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/WEB-INF/lib/shiro-web-1.4.2.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/WEB-INF/lib/slf4j-api-1.7.12.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/WEB-INF/lib/slf4j-log4j12-1.7.12.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/WEB-INF/lib/spring-aop-4.3.6.RELEASE.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/WEB-INF/lib/spring-beans-4.3.6.RELEASE.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/WEB-INF/lib/spring-context-4.3.6.RELEASE.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/WEB-INF/lib/spring-core-4.3.6.RELEASE.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/WEB-INF/lib/spring-expression-4.3.6.RELEASE.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/WEB-INF/lib/spring-jdbc-4.3.6.RELEASE.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/WEB-INF/lib/spring-orm-4.3.6.RELEASE.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/WEB-INF/lib/spring-tx-4.3.6.RELEASE.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/WEB-INF/lib/spring-web-4.3.6.RELEASE.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/WEB-INF/lib/spring-webmvc-4.3.6.RELEASE.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/WEB-INF/lib/stax-api-1.0.1.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/WEB-INF/lib/stax-ex-1.8.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/WEB-INF/lib/tools.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/WEB-INF/lib/txw2-2.3.1.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/WEB-INF/lib/validation-api-1.1.0.Final.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/WEB-INF/lib/xmlbeans-2.6.0.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/WEB-INF/page/factory/watch-list-going.jsp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/WEB-INF/page/factory/watch-list-history.jsp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/WEB-INF/page/factory/watch-list-waiting.jsp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/WEB-INF/page/index.jsp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/WEB-INF/page/login.jsp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/WEB-INF/page/manager/user-add.jsp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/WEB-INF/page/manager/user-edit.jsp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/WEB-INF/page/manager/user-list.jsp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/WEB-INF/page/user-password.jsp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/WEB-INF/page/watch/watch-add.jsp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/WEB-INF/page/watch/watch-edit.jsp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/WEB-INF/page/watch/watch-list.jsp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/WEB-INF/page/watch/watch-refuse.jsp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/WEB-INF/web.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/api/clear.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/api/init.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/api/menus.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/api/table.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/api/tableSelect.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/api/upload.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/base.jsp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/css/layuimini.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/css/public.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/css/themes/default.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/excel_template/residentInfo-template.xlsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/excel_template/~$residentInfo-template.xlsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/images/bg.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/images/captcha.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/images/donate_qrcode.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/images/favicon.ico" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/images/home.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/images/icon-login.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/images/loginbg.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/images/logo.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/js/lay-config.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/js/lay-module/echarts/echarts.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/js/lay-module/echarts/echartsTheme.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/js/lay-module/iconPicker/iconPickerFa.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/js/lay-module/layarea/layarea.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/js/lay-module/layuimini/miniAdmin.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/js/lay-module/layuimini/miniMenu.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/js/lay-module/layuimini/miniTab.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/js/lay-module/layuimini/miniTheme.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/js/lay-module/layuimini/miniTongji.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/js/lay-module/step-lay/step.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/js/lay-module/step-lay/step.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/js/lay-module/tableSelect/tableSelect.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/js/lay-module/treetable-lay/treetable.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/js/lay-module/treetable-lay/treetable.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/js/lay-module/wangEditor/fonts/w-e-icon.woff" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/js/lay-module/wangEditor/wangEditor.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/js/lay-module/wangEditor/wangEditor.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/js/lay-module/wangEditor/wangEditor.min.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/js/lay-module/wangEditor/wangEditor.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/js/lay-module/wangEditor/wangEditor.min.js.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/lib/font-awesome-4.7.0/HELP-US-OUT.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/lib/font-awesome-4.7.0/css/font-awesome.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/lib/font-awesome-4.7.0/css/font-awesome.min.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/lib/font-awesome-4.7.0/fonts/FontAwesome.otf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/lib/font-awesome-4.7.0/fonts/fontawesome-webfont.eot" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/lib/font-awesome-4.7.0/fonts/fontawesome-webfont.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/lib/font-awesome-4.7.0/fonts/fontawesome-webfont.ttf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/lib/font-awesome-4.7.0/fonts/fontawesome-webfont.woff" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/lib/font-awesome-4.7.0/fonts/fontawesome-webfont.woff2" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/lib/font-awesome-4.7.0/less/animated.less" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/lib/font-awesome-4.7.0/less/bordered-pulled.less" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/lib/font-awesome-4.7.0/less/core.less" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/lib/font-awesome-4.7.0/less/fixed-width.less" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/lib/font-awesome-4.7.0/less/font-awesome.less" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/lib/font-awesome-4.7.0/less/icons.less" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/lib/font-awesome-4.7.0/less/larger.less" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/lib/font-awesome-4.7.0/less/list.less" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/lib/font-awesome-4.7.0/less/mixins.less" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/lib/font-awesome-4.7.0/less/path.less" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/lib/font-awesome-4.7.0/less/rotated-flipped.less" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/lib/font-awesome-4.7.0/less/screen-reader.less" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/lib/font-awesome-4.7.0/less/stacked.less" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/lib/font-awesome-4.7.0/less/variables.less" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/lib/font-awesome-4.7.0/scss/_animated.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/lib/font-awesome-4.7.0/scss/_bordered-pulled.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/lib/font-awesome-4.7.0/scss/_core.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/lib/font-awesome-4.7.0/scss/_fixed-width.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/lib/font-awesome-4.7.0/scss/_icons.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/lib/font-awesome-4.7.0/scss/_larger.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/lib/font-awesome-4.7.0/scss/_list.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/lib/font-awesome-4.7.0/scss/_mixins.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/lib/font-awesome-4.7.0/scss/_path.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/lib/font-awesome-4.7.0/scss/_rotated-flipped.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/lib/font-awesome-4.7.0/scss/_screen-reader.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/lib/font-awesome-4.7.0/scss/_stacked.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/lib/font-awesome-4.7.0/scss/_variables.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/lib/font-awesome-4.7.0/scss/font-awesome.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/lib/jq-module/jquery.particleground.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/lib/jq-module/paigusu.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/lib/jq-module/zyupload/zyupload-1.0.0.min.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/lib/jq-module/zyupload/zyupload-1.0.0.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/lib/jquery-3.4.1/jquery-3.4.1.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/lib/layui-v2.6.3/css/layui.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/lib/layui-v2.6.3/css/modules/code.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/lib/layui-v2.6.3/css/modules/laydate/default/laydate.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/lib/layui-v2.6.3/css/modules/layer/default/icon-ext.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/lib/layui-v2.6.3/css/modules/layer/default/icon.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/lib/layui-v2.6.3/css/modules/layer/default/layer.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/lib/layui-v2.6.3/css/modules/layer/default/loading-0.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/lib/layui-v2.6.3/css/modules/layer/default/loading-1.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/lib/layui-v2.6.3/css/modules/layer/default/loading-2.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/lib/layui-v2.6.3/font/iconfont.eot" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/lib/layui-v2.6.3/font/iconfont.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/lib/layui-v2.6.3/font/iconfont.ttf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/lib/layui-v2.6.3/font/iconfont.woff" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/lib/layui-v2.6.3/font/iconfont.woff2" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/lib/layui-v2.6.3/layui.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/page/404.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/page/area.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/page/button.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/page/color-select.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/page/editor.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/page/form-step.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/page/form.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/page/icon-picker.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/page/icon.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/page/layer.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/page/login-1.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/page/login-2.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/page/login-3.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/page/menu.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/page/setting.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/page/table-select.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/page/table.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/page/table/add.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/page/table/edit.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/page/upload.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/page/user-password.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/page/user-setting.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/page/welcome-1.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/page/welcome-2.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/ssm/page/welcome-3.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/hs/mapper/BrandMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/hs/mapper/BrandMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/hs/mapper/WatchMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/hs/mapper/WatchMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/hs/service/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/hs/service/UserService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/hs/service/impl/UserServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/hs/service/impl/UserServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/hs/service/impl/WatchServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/hs/service/impl/WatchServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/mapper/WatchMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/mapper/WatchMapper.xml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="ChangesViewManager">
+    <option name="groupingKeys">
+      <option value="directory" />
+    </option>
+  </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Interface" />
-        <option value="Class" />
         <option value="Jsp File" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -138,7 +685,7 @@
   <component name="MavenImportPreferences">
     <option name="generalSettings">
       <MavenGeneralSettings>
-        <option name="mavenHome" value="$PROJECT_DIR$/../../apache-maven-3.6.1" />
+        <option name="mavenHome" value="$USER_HOME$/apache-maven-3.6.1" />
         <option name="userSettingsFile" value="D:\apache-maven-3.6.1\conf\settings.xml" />
       </MavenGeneralSettings>
     </option>
@@ -376,7 +923,7 @@
     <property name="SearchEverywhereHistoryKey" value="&#9;FILE&#9;file://D:/IDEA/ideaworkspace/ssm/src/main/webapp/WEB-INF/page/region/resident-list.jsp" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../aasasasa/ssm" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="project.structure.last.edited" value="Artifacts" />
@@ -411,42 +958,78 @@
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
     </configuration>
     <configuration default="true" type="Application" factoryName="Application">
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <method v="2">
+      <method>
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration default="true" type="ArquillianTestNG" factoryName="" nameIsGenerated="true">
+    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
       <option name="arquillianRunConfiguration">
         <value>
           <option name="containerStateName" value="" />
         </value>
       </option>
-      <option name="TEST_OBJECT" value="CLASS" />
-      <properties />
-      <listeners />
-      <method v="2">
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PACKAGE_NAME" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="METHOD_NAME" />
+      <option name="TEST_OBJECT" value="class" />
+      <option name="VM_PARAMETERS" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="singleModule" />
+      </option>
+      <patterns />
+      <method>
         <option name="Make" enabled="true" />
       </method>
     </configuration>
     <configuration default="true" type="JUnit" factoryName="JUnit">
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PACKAGE_NAME" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="METHOD_NAME" />
       <option name="TEST_OBJECT" value="class" />
+      <option name="VM_PARAMETERS" />
+      <option name="PARAMETERS" />
       <option name="WORKING_DIRECTORY" value="%MODULE_WORKING_DIR%" />
-      <method v="2">
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="singleModule" />
+      </option>
+      <patterns />
+      <method>
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration default="true" type="TestNG">
+    <configuration default="true" type="TestNG" factoryName="TestNG">
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="SUITE_NAME" />
+      <option name="PACKAGE_NAME" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="METHOD_NAME" />
+      <option name="GROUP_NAME" />
       <option name="TEST_OBJECT" value="CLASS" />
+      <option name="VM_PARAMETERS" />
+      <option name="PARAMETERS" />
       <option name="WORKING_DIRECTORY" value="%MODULE_WORKING_DIR%" />
+      <option name="OUTPUT_DIRECTORY" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="singleModule" />
+      </option>
+      <option name="USE_DEFAULT_REPORTERS" value="false" />
+      <option name="PROPERTIES_FILE" />
       <properties />
       <listeners />
-      <method v="2">
+      <method>
         <option name="Make" enabled="true" />
       </method>
     </configuration>
@@ -463,11 +1046,11 @@
       <server-settings>
         <option name="BASE_DIRECTORY_NAME" value="Unnamed_ssm_11" />
       </server-settings>
-      <predefined_log_file enabled="true" id="Tomcat" />
-      <predefined_log_file enabled="true" id="Tomcat Catalina" />
-      <predefined_log_file id="Tomcat Manager" />
-      <predefined_log_file id="Tomcat Host Manager" />
-      <predefined_log_file id="Tomcat Localhost Access" />
+      <predefined_log_file id="Tomcat" enabled="true" />
+      <predefined_log_file id="Tomcat Catalina" enabled="true" />
+      <predefined_log_file id="Tomcat Manager" enabled="false" />
+      <predefined_log_file id="Tomcat Host Manager" enabled="false" />
+      <predefined_log_file id="Tomcat Localhost Access" enabled="false" />
       <RunnerSettings RunnerId="Debug">
         <option name="DEBUG_PORT" value="51765" />
       </RunnerSettings>
@@ -531,8 +1114,7 @@
           <option name="PROGRAM_PARAMETERS" value="" />
         </SHUTDOWN>
       </ConfigurationWrapper>
-      <method v="2">
-        <option name="Make" enabled="true" />
+      <method>
         <option name="BuildArtifacts" enabled="true">
           <artifact name="ssm:war exploded" />
           <artifact name="wristwatch:war exploded" />
@@ -540,8 +1122,8 @@
       </method>
     </configuration>
     <list>
-      <item itemvalue="Application.MybatisGenerator" />
       <item itemvalue="Tomcat Server.tomcat8" />
+      <item itemvalue="Application.MybatisGenerator" />
     </list>
     <recent_temporary>
       <list>
@@ -580,7 +1162,8 @@
       <workItem from="1633761552576" duration="672000" />
       <workItem from="1633762444778" duration="24617000" />
       <workItem from="1633832270353" duration="27491000" />
-      <workItem from="1633860803579" duration="976000" />
+      <workItem from="1633860803579" duration="3204000" />
+      <workItem from="1633912330161" duration="27619000" />
     </task>
     <task id="LOCAL-00001" summary="first">
       <created>1632046698196</created>
@@ -589,7 +1172,14 @@
       <option name="project" value="LOCAL" />
       <updated>1632046698196</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="logn1.1">
+      <created>1633862333492</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1633862333492</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
@@ -652,7 +1242,8 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="first" />
-    <option name="LAST_COMMIT_MESSAGE" value="first" />
+    <MESSAGE value="logn1.1" />
+    <option name="LAST_COMMIT_MESSAGE" value="logn1.1" />
   </component>
   <component name="XDebuggerManager">
     <watches-manager>

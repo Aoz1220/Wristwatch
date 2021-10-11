@@ -57,7 +57,8 @@
             <div class="layui-btn-container">
                 <button class="layui-btn layui-btn-normal layui-btn-sm data-add-btn" lay-event="add"> 添加 </button>
                 <button class="layui-btn layui-btn-sm " id="importExcel"> 批量导入 </button>
-                <button class="layui-btn layui-btn-sm layui-btn-warm" lay-event="pushTown"> 下发维修厂 </button>
+                <button class="layui-btn layui-btn-sm layui-btn-warm" lay-event="pushfactory"> 下发维修厂 </button>
+                <button class="layui-btn layui-btn-sm layui-btn-danger" lay-event="sendback"> 腕表寄回 </button>
             </div>
         </script>
 
@@ -71,6 +72,27 @@
     </div>
 </div>
 <script src="${basePath}/lib/layui-v2.6.3/layui.js" charset="utf-8"></script>
+<script src="${basePath}/js/lay-config.js?v=1.0.4" charset="utf-8"></script>
+<script type="text/html" id="statusBtn">
+    {{# if(d.status=='0'){ }}
+    <button class="layui-btn layui-btn-xs layui-btn-danger" lay-event="status">审核中</button>
+    {{# } }}
+    {{# if(d.status=='1'){ }}
+    <button class="layui-btn layui-btn-xs layui-btn-normal" style="cursor:default" disabled>审核完成</button>
+    {{# } }}
+    {{# if(d.status=='2'){ }}
+    <button class="layui-btn layui-btn-xs layui-btn-normal" style="cursor:default" disabled>待维修</button>
+    {{# } }}
+    {{# if(d.status=='3'){ }}
+    <button class="layui-btn layui-btn-xs layui-btn-warm" style="cursor:default" disabled>维修中</button>
+    {{# } }}
+    {{# if(d.status=='4'){ }}
+    <button class="layui-btn layui-btn-xs layui-btn-warm" style="cursor:default" disabled>维修完成</button>
+    {{# } }}
+    {{# if(d.status=='5'){ }}
+    <button class="layui-btn layui-btn-xs layui-btn-warm" style="cursor:default" disabled>已寄回</button>
+    {{# } }}
+</script>
 <script>
     layui.use(['form', 'table'], function () {
         var $ = layui.jquery,
@@ -115,22 +137,10 @@
                 {field: 'typename', width: 120, title: '维修类型', sort: true},
                 {field: 'brandname', width: 120, title: '腕表品牌', sort: true},
                 {field: 'fixprice', width: 120, title: '维修价格(元)'},
-                {field: 'status', width: 110, title: '维修状态', sort: true,templet:function(d){
-                        if(d.status==0){
-                            return '维修审核中';
-                        }else if(d.status==1){
-                            return '待维修';
-                        }else if(d.status==2){
-                            return '维修中';
-                        }else if(d.status==3){
-                            return '维修完成';
-                        }else if(d.status==4){
-                            return '已寄回';
-                        }
-                    }},
                 {field: 'username', width: 100, title: '持有者姓名'},
                 {field: 'useraddress', width: 160, title: '持有者地址'},
                 {field: 'usertel', width: 150, title: '持有者联系方式'},
+                {field:'status',width:100,title:'维修状态',align:"center",templet:"#statusBtn"},
                 {title: '操作', minWidth: 120, toolbar: '#currentTableBar', align: "center"}
             ]],
             limits: [5,10, 15, 20],
@@ -175,6 +185,7 @@
          */
         table.on('toolbar(currentTableFilter)', function (obj) {
             if (obj.event === 'add') {  // 监听添加操作
+
                 var index = layer.open({
                     title: '添加腕表',
                     type: 2,
@@ -187,6 +198,43 @@
                 $(window).on("resize", function () {
                     layer.full(index);
                 });
+            }else if (obj.event === 'pushfactory') {  // 监听下放到维修厂操作
+                var checkStatus = table.checkStatus('currentTableId')
+                    , data = checkStatus.data;
+                //拼接数组ID
+                var ids = [];
+                for(var i=0;i<data.length;i++){
+                    ids.push(data[i].id);
+                }
+                if(ids.length==0){
+                    layer.alert("请选择要进行维修的腕表");
+                    return;
+                }
+                layer.confirm("确定进行维修吗?",{btn:['确定','取消']},function(){
+                    $.ajax({
+                        type:"get",
+                        url:"${basePath}/store/push/factory",
+                        data:{'ids':ids},
+                        dataType:"json",
+                        traditional:true,//传递数组参数
+                        success:function(data){
+                            if(data.code=="error"){
+                                layer.alert("下放维修厂失败!",function(){
+                                    layer.closeAll();
+                                });
+                            }else if(data.code=="ok"){
+                                layer.alert(data.msg,function(){
+                                    window.location.reload();
+                                });
+                            }else if(data.code=="question"){
+                                layer.alert(data.msg,function(){
+                                    window.location.reload();
+                                });
+                            }
+                        }
+                    });
+                },function(){})
+
             }
         });
 
@@ -199,6 +247,7 @@
             var data = obj.data;
             //layer.alert(data.watchname)
             if (obj.event === 'edit') {
+
                 var index = layer.open({
                     title: '编辑腕表',
                     type: 2,
@@ -213,19 +262,53 @@
                 });
                 return false;
             } else if (obj.event === 'refuse') {
-                var index = layer.open({
-                    title: '拒绝维修腕表',
-                    type: 2,
-                    shade: 0.2,
-                    maxmin:true,
-                    shadeClose: false,
-                    area: ['35%', '80%'],
-                    content: '${basePath}/store/watch/refusepage/'+data.id,
-                });
-                $(window).on("resize", function () {
-                    layer.full(index);
-                });
-                return false;
+                if(data.status==1){
+                    var index = layer.open({
+                        title: '拒绝维修腕表',
+                        type: 2,
+                        shade: 0.2,
+                        maxmin:true,
+                        shadeClose: false,
+                        area: ['35%', '80%'],
+                        content: '${basePath}/store/watch/refusepage/'+data.id,
+                    });
+                    $(window).on("resize", function () {
+                        layer.full(index);
+                    });
+                    return false;
+                }else{
+                    layer.alert("腕表仍在维修审核或已在维修厂，不能拒绝维修",function (){
+                        window.location.reload();
+                        layer.close(index);
+                    })
+                }
+
+            }else if (obj.event==='status'){
+                if (data.status=='0')
+                {
+                    layer.confirm("确认进行审核吗",function (index){
+                        $.ajax({
+                            type:"get",
+                            url:"${basePath}/store/watch/check",
+                            data:{"id":data.id},
+                            dataType:"text",
+                            success:function (data){
+                                if (data=='ok'){
+                                    layer.alert("审核成功",function (){
+                                        window.location.reload();
+                                        layer.close(index);
+                                    })
+                                }
+                                else{
+                                    layer.alert("审核失败",function (){
+                                        layer.close(index);
+                                    })
+                                }
+                            }
+                        });
+                    });
+
+                }
             }
         });
 

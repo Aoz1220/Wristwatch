@@ -4,7 +4,7 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>居民列表</title>
+    <title>待修理列表</title>
     <meta name="renderer" content="webkit">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -21,30 +21,28 @@
                 <form class="layui-form layui-form-pane" action="">
                     <div class="layui-form-item">
                         <div class="layui-inline">
-                            <label class="layui-form-label">姓名</label>
+                            <label class="layui-form-label">腕表名称</label>
                             <div class="layui-input-inline">
-                                <input type="text" name="name" autocomplete="off" class="layui-input">
+                                <input type="text" name="watchname" autocomplete="off" class="layui-input">
                             </div>
                         </div>
                         <div class="layui-inline">
-                            <label class="layui-form-label">身份证号</label>
+                            <label class="layui-form-label">持有者姓名</label>
                             <div class="layui-input-inline">
-                                <input type="text" name="idNumber" autocomplete="off" class="layui-input">
+                                <input type="text" name="username" autocomplete="off" class="layui-input">
                             </div>
                         </div>
                         <div class="layui-inline">
-                            <label class="layui-form-label">镇街道</label>
+                            <label class="layui-form-label">腕表品牌</label>
                             <div class="layui-input-inline">
-                                <select name="townName" lay-filter="town" id="town">
+                                <select name="brandId" lay-filter="brand" id="brand">
                                     <option value=""></option>
-                                    <c:forEach items="${townListAll}" var="town">
-                                        <option value="${town.townName}">${town.townName}</option>
+                                    <c:forEach items="${brandListAll}" var="brand">
+                                        <option value="${brand.id}">${brand.brandName}</option>
                                     </c:forEach>
                                 </select>
-                                  <%-- <input type="text" name="townName" autocomplete="off" class="layui-input">--%>
                             </div>
                         </div>
-
                         <div class="layui-inline">
                             <button type="submit" class="layui-btn layui-btn-primary"  lay-submit lay-filter="data-search-btn"><i class="layui-icon"></i> 搜 索</button>
                         </div>
@@ -61,8 +59,7 @@
         <table class="layui-hide" id="currentTableId" lay-filter="currentTableFilter"></table>
 
         <script type="text/html" id="currentTableBar">
-            <a class="layui-btn layui-btn-normal layui-btn-xs data-count-edit" lay-event="review">驳回</a>
-            <a class="layui-btn layui-btn-xs layui-btn-danger data-count-delete" lay-event="isolation">隔离</a>
+            <a class="layui-btn layui-btn-xs layui-btn-danger data-count-delete" lay-event="fix">维修</a>
         </script>
 
     </div>
@@ -78,7 +75,7 @@
 
         table.render({
             elem: '#currentTableId',
-            url: '${basePath}/town/resident/waiting/data.json',
+            url: '${basePath}/factory/watch/waiting/data.json',
             toolbar: '#toolbarDemo',
             defaultToolbar: ['filter', 'exports', 'print',{
                 title:'导出模板',
@@ -86,63 +83,13 @@
                 icon:'layui-icon-template-1'
             }],
             cols: [[
-                {type: 'numbers', width: 80, title: '序号', sort: true},
-                {title: '操作', minWidth: 150, toolbar: '#currentTableBar', align: "center"},
-                {field: 'status', width: 80, title: '状态', sort: true,templet:function(d){
-                        if(d.status==0){
-                            return '待处理';
-                        }else if(d.status==1){
-                            return '正常';
-                        }else if(d.status==2){
-                            return '待隔离';
-                        }else if(d.status==3){
-                            return '居家隔离中';
-                        }else if(d.status==4){
-                            return '解除居家隔离';
-                        }else if(d.status==5){
-                            return '集中隔离中';
-                        }else if(d.status==6){
-                            return '集中隔离解除';
-                        }else if(d.status==7){
-                            return '信息修正';
-                        }
-                    }},
-                {field: 'type', width: 100, title: '健康码', sort: true,templet:function(d){
-                    if(d.type==0){
-                        return '绿码';
-                    }else if(d.type==1){
-                        return '黄码';
-                    }else if(d.type==2){
-                        return '红码';
-                    }else if(d.type==3){
-                        return '未知';
-                    }
-                    }},
-                {field: 'name', width: 100, title: '姓名'},
-                {field: 'gender', width: 80, title: '性别',templet:function(d){if(d.gender == 1){return '男'}else{return '女'}}},
-                {field: 'age', width: 80, title: '年龄'},
-                {field: 'idNumber', width: 200, title: '身份证号'},
-                {field: 'regionName', width: 100, title: '所属区'},
-                {field: 'townName', width: 100, title: '镇（街道）'},
-                {field: 'address', width: 200, title: '现居住地'},
-                {field: 'tel', width: 120, title: '手机号码'},
-                {field: 'isCentralIsolation', width: 110, title: '集中隔离', sort: true},
-                {field: 'isHomeIsolation', width: 110, title: '居家隔离', sort: true},
-                {field: 'backDate', width: 120,title: '归淮日期',templet:'<div>{{layui.util.toDateString(d.backDate,"yyyy-MM-dd")}}</div>'},
-                {width: 150, title: '关联省市区',templet:function(d){
-                        return d.relationProvince+" "+d.relationCommunity;
-                    }},
-                {width: 150, title: '关联镇社区',templet:function(d){
-                        return d.relationTown+" "+d.relationCommunity;
-                    }},
-                {field: 'nucleinCheckTime', width: 200, title: '核酸检测时间',templet:'<div>{{layui.util.toDateString(d.backDate,"yyyy-MM-dd HH:mm:ss")}}</div>'},
-                {field: 'nucleinResult', width: 120, title: '核酸检测结果',templet:function(d){
-                    if(d.nucleinResult == 1){
-                        return '阳'
-                    }else if(d.nucleinResult == 0){
-                        return '阴'
-                    }else{return '无'}
-                }}
+                {type: 'numbers', width: 130, title: '序号', sort: true},
+                {title: '操作', width: 150, toolbar: '#currentTableBar', align: "center"},
+                {field: 'watchname', width: 200, title: '腕表名称', align: "center"},
+                {field: 'typename', width: 200, title: '维修类型', sort: true},
+                {field: 'brandname', width: 200, title: '腕表品牌', sort: true},
+                {field: 'fixprice', width: 200, title: '维修价格(元)'},
+                {field: 'username', width: 200, title: '持有者姓名'}
             ]],
             limits: [5,10, 15, 20],
             limit: 5,
@@ -172,9 +119,9 @@
                     curr: 1
                 }
                 , where: {
-                    'name':data.field.name,
-                    'idNumber':data.field.idNumber,
-                    'townName':data.field.townName
+                    'watchname':data.field.watchname,
+                    'username':data.field.username,
+                    'brandId':data.field.brandId
                 }
             }, 'data');
 
@@ -184,37 +131,22 @@
 
         table.on('tool(currentTableFilter)', function (obj) {
             var data = obj.data;
-            //layer.alert(data.username)
-            if (obj.event === 'review') {
-                var index = layer.open({
-                    title: '居民信息错误反馈',
-                    type: 2,
-                    shade: 0.2,
-                    maxmin:true,
-                    shadeClose: false,
-                    area: ['100%', '100%'],
-                    content: '${basePath}/region/resident/edit/'+data.idNumber,
-                });
-                $(window).on("resize", function () {
-                    layer.full(index);
-                });
-                return false;
-            } else if (obj.event === 'isolation') {
-                layer.confirm('真的隔离么', function (index) {
+            if (obj.event === 'fix') {
+                layer.confirm('确认进行维修', function (index) {
                     $.ajax({
                     	type:"post",
                     	url:"${basePath}/town/isolation/home/start",
-                    	data:{'residentId':data.id},
+                    	data:{'watchId':data.id},
                     	dataType:"text",
                     	success:function(data){
                     		if(data=="ok"){
-                    			layer.alert("隔离成功!",function(){
+                    			layer.alert("开始维修成功!",function(){
                     				/* obj.del();//移除该行
                                      layer.closeAll();*/
                     				window.location.reload();
                     			});
                     		}else{
-                    			layer.alert("隔离失败!");
+                    			layer.alert("开始维修失败!");
                     		}
                     	}	
                     });

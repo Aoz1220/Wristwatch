@@ -172,4 +172,56 @@
       user_tel = #{userTel,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
+
+  <select id="selectCannotPushByIds" parameterType="map" resultType="int">
+    select
+    id
+    from watch
+    <where>
+      <if test="ids!=null">
+        <foreach collection="ids" item="id" open="id in(" separator="," close=")">
+          #{id}
+        </foreach>
+        and status in (0,2,3,4,5)
+      </if>
+    </where>
+  </select>
+
+  <!--下放到维修厂-->
+  <update id="updateForPushFactoryByIds" parameterType="map" >
+    update watch
+    set status=2
+    <where>
+      <if test="ids!=null">
+        <foreach collection="ids" item="id" open="id in(" separator="," close=")">
+          #{id}
+        </foreach>
+      </if>
+    </where>
+  </update>
+
+  <update id="checkWatchById" parameterType="java.lang.Integer" >
+    update watch
+    set status=1
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+  <select id="selectForType" resultType="map" parameterType="map" useCache="false" >
+    select
+    t1.id,t1.watchname,t3.brand_name brandname ,t2.type_name typename,t1.fixprice,t1.status,t1.user_name username
+    from watch t1
+    left join type t2 on t1.type=t2.id
+    left join brand t3 on t1.brand=t3.id
+    where t2.id=#{typeId} and t1.status=#{status}
+    <if test="watchname!=null and watchname!=''">
+      and t1.watchname like '%${watchname}%'
+    </if>
+    <if test="username!=null and username!=''">
+      and t1.username like '%${username}%'
+    </if>
+    <if test="brandId!=null and brandId!=''">
+      and t1.brand =#{brandId}
+    </if>
+    order by t1.id desc
+  </select>
 </mapper>

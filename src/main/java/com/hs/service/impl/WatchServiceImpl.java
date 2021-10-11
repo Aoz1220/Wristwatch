@@ -4,6 +4,7 @@ import com.github.pagehelper.PageHelper;
 import com.hs.mapper.BrandMapper;
 import com.hs.mapper.WatchMapper;
 import com.hs.model.Brand;
+import com.hs.model.TbResidentInfo;
 import com.hs.model.Watch;
 import com.hs.service.WatchService;
 import org.apache.commons.lang.StringUtils;
@@ -92,5 +93,53 @@ public class WatchServiceImpl implements WatchService {
     @Override
     public int updateWatch(Watch watch) {
         return watchMapper.updateByPrimaryKeySelective(watch);
+    }
+
+    /**
+     *  查询不能下放或已经在维修厂的腕表
+     * @param ids
+     * @return
+     */
+    @Override
+    public List<Integer> getWatchCannotPush(Integer[] ids) {
+        if(ids!=null){
+            return watchMapper.selectCannotPushByIds(ids);
+        }
+        return null;
+    }
+
+    /**
+     * 下放到维修厂
+     * @param ids
+     * @return
+     */
+    @Override
+    public int updateWatchForPushFactory(Integer[] ids) {
+        if(ids!=null){
+            return watchMapper.updateForPushFactoryByIds(ids);
+        }
+        return 0;
+    }
+
+    /**
+     * 腕表审核
+     * @param watch
+     * @return
+     */
+    @Override
+    public int checkWatch(Integer id) {
+        return watchMapper.checkWatchById(id);
+    }
+
+    @Override
+    public List<Watch> getWatchList(Integer typeId, String watchname, String username, Integer brandId, Integer status, Integer page, Integer limit) {
+        List<Watch> list=null;
+        try{
+            PageHelper.startPage(page,limit);
+            list=watchMapper.selectForType(typeId,watchname,username,brandId, status);
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+        return list;
     }
 }

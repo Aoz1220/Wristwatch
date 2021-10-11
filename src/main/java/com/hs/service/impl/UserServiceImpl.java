@@ -25,6 +25,8 @@ public class UserServiceImpl implements UserService {
     private RoleMapper roleMapper;
     @Autowired
     private TypeMapper typeMapper;
+    @Autowired
+    private BrandMapper brandMapper;
     @Value("#{properties['user.password']}")
     private String defaultPassword;
 
@@ -112,5 +114,15 @@ public class UserServiceImpl implements UserService {
     @Override
     public int updateUserPassword(User user) {
         return userMapper.updateByPrimaryKey(user);
+    }
+
+    /**
+     * 查询品牌列表
+     * @param regionId
+     * @return
+     */
+    @Override
+    public List<Brand> getBrandByTypeId(Integer typeId) {
+        return brandMapper.selectByTypeId(typeId);
     }
 }

@@ -19,4 +19,5 @@ public interface BrandMapper {
     int updateByPrimaryKey(Type record);
 
     List<Brand> selectByTypeId(Integer TypeId);
+
 }

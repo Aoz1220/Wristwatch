@@ -21,4 +21,12 @@ public interface WatchService {
     public int saveWatch(Watch watch);
 
     public int updateWatch(Watch watch);
+
+    public List<Integer> getWatchCannotPush(Integer[] ids);
+
+    public int updateWatchForPushFactory(Integer[] ids);
+
+    public int checkWatch(Integer id);
+
+    public List<Watch> getWatchList(Integer typeId, String watchname, String username, Integer brandId,Integer status, Integer page, Integer limit);
 }

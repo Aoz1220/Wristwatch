@@ -1,5 +1,6 @@
 package com.hs.mapper;
 
+import com.hs.model.TbResidentInfo;
 import com.hs.model.Watch;
 import org.apache.ibatis.annotations.Param;
 
@@ -24,4 +25,12 @@ public interface WatchMapper {
     List<Map> selectByKeys(@Param("watchname")String watchname, @Param("typeId")Integer typeId, @Param("brandId")Integer brandId);
 
     Watch selectById(String id);
+
+    List<Integer> selectCannotPushByIds(@Param("ids")Integer[] ids);
+
+    int updateForPushFactoryByIds(@Param("ids")Integer[] ids);
+
+    int checkWatchById(Integer id);
+
+    List<Watch> selectForType(@Param("typeId") Integer typeId, @Param("watchname") String watchname,@Param("username") String username,@Param("brandId") Integer brandId,@Param("status")Integer status);
 }
