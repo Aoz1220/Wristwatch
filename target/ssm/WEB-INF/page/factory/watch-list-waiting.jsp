@@ -135,18 +135,18 @@
                 layer.confirm('确认进行维修', function (index) {
                     $.ajax({
                     	type:"post",
-                    	url:"${basePath}/town/isolation/home/start",
+                    	url:"${basePath}/factory/watch/fix/start",
                     	data:{'watchId':data.id},
                     	dataType:"text",
                     	success:function(data){
                     		if(data=="ok"){
-                    			layer.alert("开始维修成功!",function(){
+                    			layer.alert("开始维修!",function(){
                     				/* obj.del();//移除该行
                                      layer.closeAll();*/
                     				window.location.reload();
                     			});
                     		}else{
-                    			layer.alert("开始维修失败!");
+                    			layer.alert("无法开始维修!");
                     		}
                     	}	
                     });
