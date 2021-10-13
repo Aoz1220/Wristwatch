@@ -8,9 +8,11 @@
     <result column="role_id" property="roleId" jdbcType="INTEGER" />
     <result column="type_id" property="typeId" jdbcType="INTEGER" />
     <result column="tel" property="tel" jdbcType="VARCHAR" />
+    <result column="realname" property="realname" jdbcType="VARCHAR" />
+    <result column="balance" property="balance" jdbcType="INTEGER" />
   </resultMap>
   <sql id="Base_Column_List" >
-    id, username, password, role_id,type_id,tel
+    id, username, password, role_id,type_id,tel,realname,balance
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
@@ -139,4 +141,41 @@
       tel = #{tel,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
+  <update id="updateUserSetting" parameterType="map" >
+    update user
+    set tel = #{tel,jdbcType=VARCHAR},
+        realname = #{realname,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+  <update id="updateUserPassword" parameterType="map" >
+    update user
+    set password = #{newpassword,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+  <update id="updateBalanceByPrimaryKey" parameterType="map" >
+    update user
+    set balance=balance+#{money}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+  <update id="PayWatchFix" parameterType="map" >
+    update user
+    set balance = balance-#{fixprice}
+    where id = #{id}
+  </update>
+  <update id="RefundWatch" parameterType="map" >
+    update user
+    set balance = balance+#{fixprice}
+    where id = #{id}
+  </update>
+
+  <select id="selectBalanceById" resultType="Integer" parameterType="java.lang.Integer" >
+    select
+    balance
+    from user
+    where id = #{id}
+  </select>
+
 </mapper>

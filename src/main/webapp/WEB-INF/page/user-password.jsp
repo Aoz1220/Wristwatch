@@ -39,7 +39,7 @@
                 <div class="layui-form-item">
                     <label class="layui-form-label required">新密码</label>
                     <div class="layui-input-inline">
-                        <input type="password" name="new_password1" lay-verify="required" lay-reqtext="新的密码不能为空" placeholder="请再次输入新的密码"  value="" class="layui-input">
+                        <input type="password" name="again_password" lay-verify="required" lay-reqtext="新的密码不能为空" placeholder="请再次输入新的密码"  value="" class="layui-input">
                     </div>
                 </div>
 
@@ -56,36 +56,39 @@
 <script src="${basePath}/js/lay-config.js?v=1.0.4" charset="utf-8"></script>
 <script>
     layui.use(['form','miniTab'], function () {
-        var form = layui.form,
+        var $ = layui.jquery,
+            form = layui.form,
             layer = layui.layer,
             miniTab = layui.miniTab;
 
         //监听提交
         form.on('submit(saveBtn)', function (data) {
-            var password=data.field.password;
             var old_password=data.field.old_password;
-            $.ajax({
-                type:"post",
-                url:"${basePath}/passwordupdate",
-                data:data.field,
-                dataType:"text",
-                success:function (data) {
-                    if(password!=old_password){
-                        layer.alert("原密码错误");
+            var new_password=data.field.new_password;
+            var again_password=data.field.again_password;
+                $.ajax({
+                    type:"get",
+                    url:"${basePath}/passwordupdate",
+                    data:{"oldpassword":data.field.old_password,"newpassword":data.field.new_password},
+                    dataType:"text",
+                    success:function (data) {
+                        if(new_password!=again_password){
+                            layer.alert("两次新密码输入不一致");
+                        }else if(old_password==new_password){
+                            layer.alert("新密码与旧密码不能相同");
+                        }else if(data=="ok"){
+                            layer.msg("修改成功，请重新登录",function () {
+                                window.location = '${basePath}/logout';
+                            });
+                        }else if(data=="error"){
+                            layer.alert("原密码错误，请重新输入");
+                        }else if(data=="no"){
+                            layer.alert("系统异常，联系管理员");
+                        }
                     }
-                    else if(data=="ok"){
-
-                        layer.msg("修改成功，请重新登录",function () {
-                            window.location = '${basePath}/page/login-3.html';
-                        });
-                    }else{
-                        layer.alert("系统异常，请联系管理员");
-                    }
-                }
-            })
-            return false;
+                })
+                return false;
         });
-
     });
 </script>
 </body>
