@@ -23,7 +23,17 @@ public interface UserService {
 
     public int updateUser(User user);
 
-    public int updateUserPassword(User user);
+    public int updateUserSetting(Integer id,String tel ,String realname);
+
+    public int updateUserPassword(Integer id,String newpassword);
+
+    public int updateUserBalance(Integer id,Integer money);
 
     public List<Brand> getBrandByTypeId(Integer typeId);
+
+    public int afterPay(Integer id,Integer fixprice);
+
+    public int afterRefund(Integer id,Integer fixprice);
+
+    public int selectBalanceById(Integer id);
 }

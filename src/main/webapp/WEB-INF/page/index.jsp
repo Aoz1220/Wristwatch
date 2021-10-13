@@ -63,13 +63,17 @@
                     <a href="javascript:;" data-check-screen="full"><i class="fa fa-arrows-alt"></i></a>
                 </li>
                 <li class="layui-nav-item layuimini-setting">
+                    <input id="roleId" value="<shiro:principal property="roleId"/>" type="hidden" />
                     <a href="javascript:;"><shiro:principal property="username"/></a>
                     <dl class="layui-nav-child">
                         <dd>
-                            <a href="javascript:;" layuimini-content-href="${basePath}/page/user-setting.html" data-title="基本资料" data-icon="fa fa-gears">基本资料<span class="layui-badge-dot"></span></a>
+                            <a href="javascript:;" layuimini-content-href="${basePath}/usersetting" data-title="基本资料" data-icon="fa fa-gears">基本资料</span></a>
                         </dd>
                         <dd>
                             <a href="javascript:;" layuimini-content-href='${basePath}/editpassword' data-title="修改密码" data-icon="fa fa-gears">修改密码</a>
+                        </dd>
+                        <dd>
+                            <a href="javascript:;" id="chongzhi" layuimini-content-href='${basePath}/addbalance' data-title="充值" data-icon="fa fa-gears" style="visibility: hidden" >充值</a>
                         </dd>
                         <dd>
                             <hr>
@@ -138,6 +142,11 @@
             layer = layui.layer,
             miniAdmin = layui.miniAdmin,
             miniTongji = layui.miniTongji;
+
+            var s1 = document.getElementById("roleId");
+            if(s1.value==4){
+                document.getElementById("chongzhi").style.visibility="visible";
+            }
 
         var options = {
             iniUrl: "${basePath}/menu.json",    // 初始化接口

@@ -4,6 +4,8 @@ import com.github.pagehelper.PageInfo;
 import com.hs.model.*;
 import com.hs.service.UserService;
 import com.hs.service.WatchService;
+import com.hs.utils.ExcelUtils;
+import com.hs.utils.SessionUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,6 +13,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -111,7 +115,7 @@ public class WatchController {
     public String toWatchAdd(Model model){
         List<Type> typeList=userService.getTypeAll();
         model.addAttribute("typeList",typeList);
-        return "watch/watch-add";
+        return "customer/watch-order-add";
     }
 
     /**
@@ -122,6 +126,8 @@ public class WatchController {
     @RequestMapping("/watch/save")
     @ResponseBody
     public String saveWatch(Watch watch){
+            //获取登录人修理腕表类型ID
+            User user= (User) SessionUtil.getPrimaryPrincipal();
             //判断腕表是否已存在
             Watch hasWatch=watchService.getWatchByWatchname(watch.getWatchname());
             if(hasWatch!=null){
@@ -129,6 +135,7 @@ public class WatchController {
             }
             //设置默认状态
             watch.setStatus(0);
+            watch.setUserName(user.getRealname());
             int result=watchService.saveWatch(watch);
             if(result==1){
                 return "ok";
@@ -152,7 +159,26 @@ public class WatchController {
         model.addAttribute("typeList",typeList);
         model.addAttribute("brandList",brandList);
         model.addAttribute("watch",watch);
-        return "watch/watch-edit";
+        return "customer/watch-order-edit";
+    }
+
+    /**
+     * 跳转到腕表编辑页面
+     * @param model
+     * @param id
+     * @return
+     */
+    @RequestMapping("/watch/setprice/{id}")
+    public String setPriceWatch(Model model,@PathVariable("id") String id){
+        //查询腕表类型下拉框
+        List<Type> typeList=userService.getTypeAll();
+        Watch watch=watchService.getWatchById(id);
+        Integer typeId=watch.getType();
+        List<Brand> brandList=watchService.getBrandByTypeId(typeId);
+        model.addAttribute("typeList",typeList);
+        model.addAttribute("brandList",brandList);
+        model.addAttribute("watch",watch);
+        return "watch/watch-setprice";
     }
 
     /**
@@ -176,6 +202,21 @@ public class WatchController {
     }
 
     /**
+     * 更新腕表价格
+     * @return
+     */
+    @RequestMapping("/watch/setprice")
+    @ResponseBody
+    public String updateWatchPrice(Watch watch){
+        int result=watchService.updateWatchPrice(watch);
+        if(result==1) {
+            return "ok";
+        }else {
+            return "error";
+        }
+    }
+
+    /**
      * 下放到维修厂
      * @param ids
      * @return
@@ -184,7 +225,7 @@ public class WatchController {
     @ResponseBody
     public Map pushFactory(Integer[] ids){
         Map map=new HashMap();
-        //判断在维修审核或已在维修厂
+        //判断不能下放的腕表
         List<Integer> list=watchService.getWatchCannotPush(ids);
         Integer[] array=new Integer[ids.length-list.size()];
         int index=0;
@@ -199,20 +240,20 @@ public class WatchController {
         if(array.length!=0){
             int result=watchService.updateWatchForPushFactory(array);
             if(result>0){
-                map.put("msg","成功下放"+array.length+"块腕表到修理厂，"+list.size()+"块腕表仍在维修审核或已在维修厂");
+                map.put("msg","成功下放"+array.length+"块腕表到修理厂，"+list.size()+"块腕表维修订单不在审核成功状态，不可下放");
                 map.put("code","ok");
                 return map;
             }
             map.put("code","error");
             return map;
         }
-        map.put("msg",list.size()+"块腕表仍在维修审核或已在维修厂");
+        map.put("msg",list.size()+"块腕表维修订单不在审核成功状态，不可下放");
         map.put("code","question");
         return map;
     }
     /**
-     * 下放到维修厂
-     * @param ids
+     * 维修审核
+     * @param id
      * @return
      */
     @RequestMapping("/watch/check")
@@ -223,6 +264,132 @@ public class WatchController {
             return "ok";
         }else {
             return "error";
+        }
+    }
+
+    /**
+     * 订单付款
+     * @param id,fixprice
+     * @return
+     */
+    @RequestMapping("/watch/pay")
+    @ResponseBody
+    public Map payWatch(Integer id,Integer fixprice){
+        Map map=new HashMap();
+        User user= (User) SessionUtil.getPrimaryPrincipal();
+        if(user.getBalance()>fixprice){
+            int result=watchService.payWatch(id);
+            result+=userService.afterPay(user.getId(),fixprice);
+            if(result==2){
+                map.put("msg","付款成功！您所剩余额："+userService.selectBalanceById(user.getId())+"元，腕表将尽快以您选中的方式到店。");
+                map.put("code","ok");
+                return map;
+            }
+            map.put("code","error");
+            return map;
+        }
+        map.put("msg","余额不足，请先充值");
+        map.put("code","question");
+        return map;
+    }
+
+    /**
+     * 跳转到申请退款界面
+     * @return
+     */
+    @RequestMapping("/watch/refundpage/{id}")
+    public String toWatchRefundPageList(Model model,@PathVariable("id") String id){
+        Watch watch=watchService.getWatchById(id);
+        model.addAttribute("watch",watch);
+        return "customer/watch-refund";
+    }
+
+    /**
+     * 申请退款
+     * @param id
+     * @return
+     */
+    @RequestMapping("/watch/refund")
+    @ResponseBody
+    public Map refundWatch(Integer id,Integer fixprice) {
+        Map map=new HashMap();
+        User user= (User) SessionUtil.getPrimaryPrincipal();
+        int result=userService.afterRefund(user.getId(),fixprice);
+        result += watchService.refuseWatch(id);
+        if(result==2){
+            map.put("msg","退款成功！您所剩余额："+userService.selectBalanceById(user.getId())+"元");
+            map.put("code","ok");
+            return map;
+        }
+        map.put("code","error");
+        return map;
+    }
+
+    /**
+     * 腕表寄回给客户
+     * @param ids
+     * @return
+     */
+    @RequestMapping("/sendback")
+    @ResponseBody
+    public Map sendbackWatch(Integer[] ids){
+        Map map=new HashMap();
+        //判断不能下放的腕表
+        List<Integer> list=watchService.getWatchCannotSendback(ids);
+        Integer[] array=new Integer[ids.length-list.size()];
+        int index=0;
+        for(int i=0;i<ids.length;i++){
+            if(list.contains(ids[i])){
+                continue;
+            }
+            array[index]=ids[i];
+            index++;
+
+        }
+        if(array.length!=0){
+            int result=watchService.updateWatchForSendback(array);
+            if(result>0){
+                map.put("msg","根据用户填写收件人、地址、联系方式，成功寄出"+array.length+"块腕表，"+list.size()+"块腕表已寄出或还未完成维修或仍未开始订单流程，无法寄出");
+                map.put("code","ok");
+                return map;
+            }
+            map.put("code","error");
+            return map;
+        }
+        map.put("msg",list.size()+"块腕表已寄出或还未完成维修或仍未开始订单流程，无法寄出");
+        map.put("code","question");
+        return map;
+    }
+
+    /**
+     * 接收腕表
+     * @param id
+     * @return
+     */
+    @RequestMapping("/watch/instore")
+    @ResponseBody
+    public String instoreWatch(Integer id){
+        int result=watchService.instoreWatch(id);
+        if(result==1) {
+            return "ok";
+        }else {
+            return "error";
+        }
+    }
+
+    /**
+     * 导出订单信息表模板
+     * @param response
+     * @param session
+     */
+    @RequestMapping("/watch/template")
+    public void printExcelTemplate(HttpServletResponse response, HttpSession session){
+        List<Watch> list=watchService.getAllWatchList();
+
+        try{
+            ExcelUtils.printEasyExcelTemplate(list,"watch-template",response,session);
+        }catch (Exception e){
+            e.printStackTrace();
         }
     }
 }

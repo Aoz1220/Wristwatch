@@ -15,6 +15,10 @@ public class User implements Serializable {
 
     private String tel;
 
+    private String realname;
+
+    private Integer balance;
+
     public Integer getId() {
         return id;
     }
@@ -61,5 +65,21 @@ public class User implements Serializable {
 
     public void setTel(String tel) {
         this.tel = tel;
+    }
+
+    public String getRealname() {
+        return realname;
+    }
+
+    public void setRealname(String realname) {
+        this.realname = realname;
+    }
+
+    public Integer getBalance() {
+        return balance;
+    }
+
+    public void setBalance(Integer balance) {
+        this.balance = balance;
     }
 }

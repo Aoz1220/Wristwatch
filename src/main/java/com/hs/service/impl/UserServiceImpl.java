@@ -107,22 +107,59 @@ public class UserServiceImpl implements UserService {
     }
 
     /**
+     * 更新用户基本资料
+     * @param id
+     * @param tel
+     * @param realname
+     * @return
+     */
+    @Override
+    public int updateUserSetting(Integer id,String tel,String realname) {
+        return userMapper.updateUserSetting(id,tel,realname);
+    }
+
+    /**
      * 修改密码
      * @param user
      * @return
      */
     @Override
-    public int updateUserPassword(User user) {
-        return userMapper.updateByPrimaryKey(user);
+    public int updateUserPassword(Integer id,String newpassword) {
+        return userMapper.updateUserPassword(id,MD5Utils.getMD5(newpassword));
+    }
+
+    /**
+     * 客户充值
+     * @param id
+     * @param money
+     * @return
+     */
+    @Override
+    public int updateUserBalance(Integer id,Integer money) {
+        return userMapper.updateBalanceByPrimaryKey(id,money);
     }
 
     /**
      * 查询品牌列表
-     * @param regionId
+     * @param typeId
      * @return
      */
     @Override
     public List<Brand> getBrandByTypeId(Integer typeId) {
         return brandMapper.selectByTypeId(typeId);
+    }
+
+    @Override
+    public int  afterPay(Integer id, Integer fixprice) {
+        return userMapper.PayWatchFix(id,fixprice);
+    }
+    @Override
+    public int  afterRefund(Integer id, Integer fixprice) {
+        return userMapper.RefundWatch(id,fixprice);
+    }
+
+    @Override
+    public int selectBalanceById(Integer id){
+        return userMapper.selectBalanceById(id);
     }
 }

@@ -24,18 +24,7 @@ public class TypeConverter implements Converter<Integer> {
 
     @Override
     public Integer convertToJavaData(CellData cellData, ExcelContentProperty excelContentProperty, GlobalConfiguration globalConfiguration) throws Exception {
-        Integer result=null;
-        String type=cellData.getStringValue();
-        if("绿码".equals(type)){
-            result=0;
-        }else if("黄码".equals(type)){
-            result=1;
-        }else if("红码".equals(type)){
-            result=2;
-        }else {
-            result=3;
-        }
-        return result;
+        return null;
     }
 
     @Override
@@ -43,14 +32,12 @@ public class TypeConverter implements Converter<Integer> {
         String result=null;
         //判断属性名称
         if(excelContentProperty.getField().getName().equals("type")){
-            if(data==0){
-                result="绿码";
-            }else if(data==1){
-                result="黄码";
+            if(data==1){
+                result="电子表维修";
             }else if(data==2){
-                result="红码";
-            }else {
-                result="未知";
+                result="机械表维修";
+            }else if(data==3){
+                result="智能手表维修";
             }
         }else{//其他属性直接输出，注意只能输出字符串，所以整型要转换成String
             if(data==null){

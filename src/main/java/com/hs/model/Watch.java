@@ -1,22 +1,35 @@
 package com.hs.model;
 
+import com.alibaba.excel.annotation.ExcelIgnore;
+import com.alibaba.excel.annotation.ExcelProperty;
+import com.alibaba.excel.annotation.write.style.ColumnWidth;
+import com.alibaba.excel.annotation.write.style.ContentRowHeight;
+import com.alibaba.excel.annotation.write.style.HeadRowHeight;
+import com.hs.converter.BrandConverter;
+import com.hs.converter.StatusConverter;
+import com.hs.converter.TypeConverter;
+
+@ContentRowHeight(24)
+@HeadRowHeight(50)
+@ColumnWidth(25)
 public class Watch {
+    @ExcelIgnore
     private Integer id;
-
+    @ExcelProperty("腕表名称")
     private String watchname;
-
+    @ExcelProperty(value = "腕表品牌",converter = BrandConverter.class)
     private Integer brand;
-
+    @ExcelProperty(value = "腕表类型",converter = TypeConverter.class)
     private Integer type;
-
+    @ExcelProperty("维修价格（元）")
     private Integer fixprice;
-
+    @ExcelProperty(value = "订单（维修）状态",converter = StatusConverter.class)
     private Integer status;
-
+    @ExcelProperty("持有者地址")
     private String userAddress;
-
+    @ExcelProperty("持有者姓名")
     private String userName;
-
+    @ExcelProperty("持有者联系方式")
     private String userTel;
 
     public Integer getId() {

@@ -7,9 +7,9 @@ import com.alibaba.excel.metadata.GlobalConfiguration;
 import com.alibaba.excel.metadata.property.ExcelContentProperty;
 
 /**
- * 性别转换器
+ *分类转换器
  */
-public class GenderConverter implements Converter<Integer> {
+public class BrandConverter implements Converter<Integer> {
 
 
     @Override
@@ -24,34 +24,39 @@ public class GenderConverter implements Converter<Integer> {
 
     @Override
     public Integer convertToJavaData(CellData cellData, ExcelContentProperty excelContentProperty, GlobalConfiguration globalConfiguration) throws Exception {
-        //return (Integer) ("男".equals(cellData.getStringValue())?1:0);
-        Integer result=null;
-        String gender=cellData.getStringValue();
-        if("男".equals(gender)){
-            result=1;
-        }else if("女".equals(gender)){
-            result=0;
-        }
-        return result;
+        return null;
     }
 
+
     @Override
-    public CellData convertToExcelData(Integer gender, ExcelContentProperty excelContentProperty, GlobalConfiguration globalConfiguration) throws Exception {
-       // CellData data = new CellData((gender==1)?"男":"女");(参数Integer gender)
-        //return data;
+    public CellData convertToExcelData(Integer data, ExcelContentProperty excelContentProperty, GlobalConfiguration globalConfiguration) throws Exception {
         String result=null;
         //判断属性名称
-        if(excelContentProperty.getField().getName().equals("gender")){
-            if(gender==1){
-                result="男";
-            }else {
-                result="女";
+        if(excelContentProperty.getField().getName().equals("brand")){
+            if(data==1){
+                result="欧米茄";
+            }else if(data==2){
+                result="阿然表";
+            }else if(data==3){
+                result="周阳表";
+            }else if(data==4){
+                result="蒋一铭表";
+            }else if(data==6){
+                result="林澳表";
+            }else if(data==7){
+                result="电子表1号";
+            }else if(data==8){
+                result="机械手表1号";
+            }else if(data==9){
+                result="智能手表1号";
+            }else if(data==10){
+                result="智能手表2号";
             }
         }else{//其他属性直接输出，注意只能输出字符串，所以整型要转换成String
-            if(gender==null){
+            if(data==null){
                 result="";
             }else{
-                result=gender+"";
+                result=data+"";
             }
         }
         CellData celldata = new CellData(result);

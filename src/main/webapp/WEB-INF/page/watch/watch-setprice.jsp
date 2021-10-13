@@ -37,18 +37,18 @@
                 <div class="layui-inline">
                     <label class="layui-form-label required">腕表名称<span class="star">*</span></label>
                     <div class="layui-input-inline">
-                        <input type="text" value="${watch.watchname}" name="watchname" lay-verify="required" lay-reqtext="腕表名称不能为空" autocomplete="off" class="layui-input">
+                        <input type="text" value="${watch.watchname}" name="watchname" lay-verify="required" lay-reqtext="腕表名称不能为空" autocomplete="off" class="layui-input" disabled="disabled">
                         <input type="hidden" name="id" value="${watch.id}">
                     </div>
                 </div>
             </div>
-            <div class="layui-form-item">
+            <div class="layui-form-item" >
                 <div class="layui-form-item">
-                    <div class="layui-inline">
+                    <div class="layui-inline" readonly="true">
                         <label class="layui-form-label">维修类型<span class="star">*</span></label>
                         <div class="layui-input-inline">
-                            <select name="type" lay-filter="type" lay-verify="required" lay-reqtext="维修类型不能为空">
-                                <option value=""></option>
+                            <select name="type" lay-filter="type" lay-verify="required" lay-reqtext="维修类型不能为空" disabled="disabled" >
+                                <option value="" readonly="true"></option>
                                 <c:forEach items="${typeList}" var="type">
                                     <option value="${type.id}" <c:if test="${type.id eq watch.type}">selected</c:if>>${type.typeName}</option>
                                 </c:forEach>
@@ -58,8 +58,8 @@
                     <div class="layui-inline">
                         <label class="layui-form-label">腕表品牌<span class="star">*</span></label>
                         <div class="layui-input-inline">
-                            <select name="brand" id="brand" lay-verify="required" lay-reqtext="腕表品牌不能为空">
-                                <option value=""></option>
+                            <select name="brand" id="brand" lay-verify="required" lay-reqtext="腕表品牌不能为空"  disabled="disabled">
+                                <option value="" readonly="true"></option>
                                 <c:forEach items="${brandList}" var="brand">
                                     <option value="${brand.id}" <c:if test="${brand.id eq watch.brand}">selected</c:if>>${brand.brandName}</option>
                                 </c:forEach>
@@ -74,26 +74,6 @@
                     <div class="layui-input-inline">
                         <input type="text" value="${watch.fixprice}" name="fixprice" lay-verify="required" lay-reqtext="维修价格不能为空" autocomplete="off" class="layui-input">
                     </div>
-                </div>
-            </div>
-            <div class="layui-form-item">
-                <div class="layui-inline">
-                    <label class="layui-form-label required">持有者姓名<span class="star">*</span></label>
-                    <div class="layui-input-inline">
-                        <input type="text" value="${watch.userName}" name="userName" lay-verify="required" lay-reqtext="持有者姓名不能为空" autocomplete="off" class="layui-input">
-                    </div>
-                </div>
-                <div class="layui-inline">
-                    <label class="layui-form-label required">持有者联系方式<span class="star">*</span></label>
-                    <div class="layui-input-inline">
-                        <input type="text" value="${watch.userTel}" name="userTel" lay-verify="required|phone" lay-reqtext="持有者联系方式不能为空" autocomplete="off" class="layui-input">
-                    </div>
-                </div>
-            </div>
-            <div class="layui-form-item">
-                <label class="layui-form-label">持有者地址<span class="star">*</span></label>
-                <div class="layui-input-block">
-                    <input type="text" value="${watch.userAddress}" name="userAddress" lay-verify="required" lay-reqtext="持有者地址不能为空" autocomplete="off" class="layui-input layui-input-long">
                 </div>
             </div>
             <div class="layui-form-item">
@@ -146,12 +126,12 @@
         form.on('submit(saveBtn)', function (data) {
             $.ajax({
                 type:"post",
-                url:"${basePath}/store/watch/update",
+                url:"${basePath}/store/watch/setprice",
                 data:data.field,
                 dataType:"text",
                 success:function(data){
                     if(data=="ok"){
-                        layer.alert("修改成功!",function(){
+                        layer.alert("定价成功!",function(){
                             //刷新父页面
                             parent.window.location.reload();
                         });

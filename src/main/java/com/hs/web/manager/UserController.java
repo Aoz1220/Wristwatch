@@ -2,6 +2,7 @@ package com.hs.web.manager;
 
 import com.github.pagehelper.PageInfo;
 import com.hs.model.*;
+import com.hs.utils.SessionUtil;
 import org.springframework.web.bind.annotation.PathVariable;
 import com.hs.service.RoleService;
 import com.hs.service.UserService;
@@ -162,6 +163,24 @@ public class UserController {
             return "exist";
         }
         int result=userService.updateUser(user);
+        if(result==1) {
+            return "ok";
+        }else {
+            return "error";
+        }
+    }
+
+    /**
+     * 更新基本资料
+     * @param tel
+     * @param realname
+     * @return
+     */
+    @RequestMapping("/user/setting")
+    @ResponseBody
+    public String updateUsersetting(String tel,String realname){
+        User user= (User) SessionUtil.getPrimaryPrincipal();
+        int result=userService.updateUserSetting(user.getId(),tel,realname);
         if(result==1) {
             return "ok";
         }else {
