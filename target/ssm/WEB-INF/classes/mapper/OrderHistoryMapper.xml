@@ -3,11 +3,14 @@
 <mapper namespace="com.hs.mapper.OrderHistoryMapper" >
   <resultMap id="BaseResultMap" type="com.hs.model.OrderHistory" >
     <id column="id" property="id" jdbcType="INTEGER" />
-    <result column="watch_id" property="watchId" jdbcType="VARCHAR" />
+    <result column="watch_id" property="watchId" jdbcType="INTEGER" />
     <result column="finish_time" property="finishTime" jdbcType="TIMESTAMP" />
+    <result column="refund_reason" property="refundReason" jdbcType="VARCHAR" />
+    <result column="refund_price" property="refundPrice" jdbcType="INTEGER" />
+    <result column="refuse_reason" property="refuseReason" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Base_Column_List" >
-    id, watch_id, finish_time
+    id, watch_id, finish_time,refund_reason,refund_price,refuse_reason
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
@@ -15,18 +18,116 @@
     from order_history
     where id = #{id,jdbcType=INTEGER}
   </select>
+  <!--根据id查询腕表信息-->
+  <select id="selectByWatchId" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select
+    <include refid="Base_Column_List" />
+    from order_history
+    where watch_id = #{id}
+  </select>
+
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from order_history
     where id = #{id,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.hs.model.OrderHistory" >
     insert into order_history (id, watch_id,
-      finish_time
+      finish_time,refund_reason,refund_price,refund_reason
       )
-    values (#{id,jdbcType=INTEGER}, #{watchId,jdbcType=VARCHAR},
-        #{finishTime,jdbcType=TIMESTAMP}
+    values (#{id,jdbcType=INTEGER}, #{watchId,jdbcType=INTEGER},
+        #{finishTime,jdbcType=TIMESTAMP},#{refundReason,jdbcType=VARCHAR},#{refundPrice,jdbcType=INTEGER},#{refuseReason,jdbcType=VARCHAR}
       )
   </insert>
+
+  <insert id="insertWatchOrderForRefund" parameterType="com.hs.model.OrderHistory" >
+    insert into order_history
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="watchId != null" >
+        watch_id,
+      </if>
+      <if test="finishTime != null" >
+        finish_time,
+      </if>
+      <if test="refundReason != null" >
+        refund_reason,
+      </if>
+      <if test="refundPrice != null" >
+        refund_price,
+      </if>
+      <if test="refuseReason != null" >
+        refuse_reason,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="watchId != null" >
+        #{watchId,jdbcType=INTEGER},
+      </if>
+      <if test="finishTime != null" >
+        #{finishTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="refundReason != null" >
+        #{refundReason,jdbcType=VARCHAR},
+      </if>
+      <if test="refundPrice != null" >
+        #{refundPrice,jdbcType=INTEGER},
+      </if>
+      <if test="refuseReason != null" >
+        #{refuseReason,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+
+  <insert id="insertWatchOrderForRefuse" parameterType="com.hs.model.OrderHistory" >
+    insert into order_history
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="watchId != null" >
+        watch_id,
+      </if>
+      <if test="finishTime != null" >
+        finish_time,
+      </if>
+      <if test="refundReason != null" >
+        refund_reason,
+      </if>
+      <if test="refundPrice != null" >
+        refund_price,
+      </if>
+      <if test="refuseReason != null" >
+        refuse_reason,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="watchId != null" >
+        #{watchId,jdbcType=INTEGER},
+      </if>
+      <if test="finishTime != null" >
+        #{finishTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="refundReason != null" >
+        #{refundReason,jdbcType=VARCHAR},
+      </if>
+      <if test="refundPrice != null" >
+        #{refundPrice,jdbcType=INTEGER},
+      </if>
+      <if test="refuseReason != null" >
+        #{refuseReason,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+
+
   <insert id="insertSelective" parameterType="com.hs.model.OrderHistory" >
     insert into order_history
     <trim prefix="(" suffix=")" suffixOverrides="," >
@@ -39,16 +140,34 @@
       <if test="finishTime != null" >
         finish_time,
       </if>
+      <if test="refundReason != null" >
+        refund_reason,
+      </if>
+      <if test="refundPrice != null" >
+        refund_price,
+      </if>
+      <if test="refuseReason != null" >
+        refuse_reason,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="id != null" >
         #{id,jdbcType=INTEGER},
       </if>
       <if test="watchId != null" >
-        #{watchId,jdbcType=VARCHAR},
+        #{watchId,jdbcType=INTEGER},
       </if>
       <if test="finishTime != null" >
         #{finishTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="refundReason != null" >
+        #{refundReason,jdbcType=VARCHAR},
+      </if>
+      <if test="refundPrice != null" >
+        #{refundPrice,jdbcType=INTEGER},
+      </if>
+      <if test="refuseReason != null" >
+        #{refuseReason,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -56,18 +175,40 @@
     update order_history
     <set >
       <if test="watchId != null" >
-        watch_id = #{watchId,jdbcType=VARCHAR},
+        watch_id = #{watchId,jdbcType=INTEGER},
       </if>
       <if test="finishTime != null" >
         finish_time = #{finishTime,jdbcType=TIMESTAMP},
       </if>
+      <if test="refundReason != null" >
+        refund_reason = #{refundReason,jdbcType=VARCHAR},
+      </if>
+      <if test="refundPrice != null" >
+        refund_price = #{refundPrice,jdbcType=INTEGER},
+      </if>
+      <if test="refuseReason != null" >
+        refuse_reason = #{refuseReason,jdbcType=VARCHAR},
+      </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
+  <update id="updateWatchOrderForRefund" parameterType="com.hs.model.OrderHistory" >
+    update order_history
+    <set >
+      <if test="finishTime != null" >
+        finish_time = #{finishTime,jdbcType=TIMESTAMP},
+        refund_price = #{refundPrice,jdbcType=INTEGER}
+      </if>
+    </set>
+    where watch_id = #{watchId,jdbcType=INTEGER}
+  </update>
   <update id="updateByPrimaryKey" parameterType="com.hs.model.OrderHistory" >
     update order_history
-    set watch_id = #{watchId,jdbcType=VARCHAR},
+    set watch_id = #{watchId,jdbcType=INTEGER},
       finish_time = #{finishTime,jdbcType=TIMESTAMP},
+      refund_reason = #{refundReason,jdbcType=VARCHAR},
+      refund_price = #{refundPrice,jdbcType=INTEGER},
+      refuse_reason = #{refuseReason,jdbcType=VARCHAR},
     where id = #{id,jdbcType=INTEGER}
   </update>
 

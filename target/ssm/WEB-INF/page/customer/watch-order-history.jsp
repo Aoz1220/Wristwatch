@@ -4,7 +4,7 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>修理记录</title>
+    <title>已完成记录</title>
     <meta name="renderer" content="webkit">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -86,7 +86,7 @@
             }],
             cols: [[
                 {type: 'numbers', width: 130, title: '序号', sort: true},
-                {field: 'finish_time', width: 200,  title: '订单完成时间',sort: true,templet:'<div>{{ layui.util.toDateString(d.finish_time, "yyyy-MM-dd HH:mm:ss") }}</div>'},
+                {field: 'finishtime', width: 200,  title: '订单完成时间',sort: true,templet:'<div>{{ layui.util.toDateString(d.finishtime, "yyyy-MM-dd HH:mm:ss") }}</div>'},
                 {field: 'watchname', width: 150, title: '腕表名称', align: "center"},
                 {field: 'typename', width: 150, title: '维修类型', sort: true},
                 {field: 'brandname', width: 150, title: '腕表品牌', sort: true},

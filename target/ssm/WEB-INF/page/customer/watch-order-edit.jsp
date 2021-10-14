@@ -33,6 +33,7 @@
 <div class="layuimini-container">
     <div class="layuimini-main">
         <form class="layui-form" action="">
+            <input type="text" value="${watch.fixprice}" name="fixprice" id="fixprice"  autocomplete="off" class="layui-input" type="hidden">
             <div class="layui-form-item">
                 <div class="layui-inline">
                     <label class="layui-form-label required">腕表名称<span class="star">*</span></label>
@@ -72,7 +73,7 @@
                 <div class="layui-inline">
                     <label class="layui-form-label required">维修价格(元)<span class="star">*</span></label>
                     <div class="layui-input-inline">
-                        <input type="text" value="${watch.fixprice}" name="fixprice" lay-verify="required" lay-reqtext="维修价格不能为空" autocomplete="off" class="layui-input" disabled="disabled">
+                        <input type="text"  name="price" id="price"  autocomplete="off" class="layui-input" disabled="disabled">
                     </div>
                 </div>
             </div>
@@ -113,6 +114,12 @@
             $ = layui.jquery,
             laydate=layui.laydate;
 
+        var s1=document.getElementById("fixprice");
+        if(s1.value==""){
+            document.getElementById("price").value="等待总店定价";
+        }else{
+            document.getElementById("price").value="${watch.fixprice}";
+        }
 
         /*给腕表类型下拉框绑定change事件*/
         form.on('select(type)',function(data){

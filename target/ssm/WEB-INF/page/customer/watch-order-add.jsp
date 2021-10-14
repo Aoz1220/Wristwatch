@@ -69,9 +69,9 @@
                 <div class="layui-input-inline">
                     <select name="instore" id="instore" lay-verify="required" lay-reqtext="到店方式不能为空">
                         <option value=""></option>
-                        <option value="">快递寄出</option>
-                        <option value="">到店给出</option>
-                        <option value="">上门获取</option>
+                        <option value="快递寄出">快递寄出</option>
+                        <option value="到店给出">到店给出</option>
+                        <option value="上门获取">上门获取</option>
                     </select>
                 </div>
             </div>
@@ -140,7 +140,7 @@
             $.ajax({
                 type:"post",
                 url:"${basePath}/store/watch/save",
-                data:data.field,
+                data:{"watchname":data.field.watchname,"type":data.field.type,"brand":data.field.brand,"tel":data.field.userTel,"userAddress":data.field.userAddress},
                 dataType:"text",
                 success:function(data){
                     if(data=="ok"){
