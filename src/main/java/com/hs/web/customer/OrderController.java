@@ -114,4 +114,64 @@ public class OrderController {
         map.put("data",pageInfo.getList());
         return map;
     }
+
+    /**
+     * 跳转到退款订单记录页面
+     * @return
+     */
+    @RequestMapping("/order/refund/history")
+    public String toRefundOrderHistory(Model model){
+        //腕表类型下拉框数据
+        List<Type> typeList=userService.getTypeAll();
+        //参数返回页面
+        model.addAttribute("typeList",typeList);
+        return "customer/watch-order-refund-history";
+    }
+
+    /**
+     * 跳转到退款订单记录页面
+     * @return
+     */
+    @RequestMapping("/order/refuse/history")
+    public String toRefuseOrderHistory(Model model){
+        //腕表类型下拉框数据
+        List<Type> typeList=userService.getTypeAll();
+        //参数返回页面
+        model.addAttribute("typeList",typeList);
+        return "customer/watch-order-refuse-history";
+    }
+
+    @RequestMapping("/order/refund/history/data.json")
+    @ResponseBody
+    public Map getRefundOrderHistoryData(String watchname, Integer typeId, Integer brandId, Integer page, Integer limit) {
+        Map map = new HashMap();
+        //获取登录人修理腕表类型id
+        User user = (User) SessionUtil.getPrimaryPrincipal();
+        //查询列表数据
+        List<Map> list=watchService.getRefundOrderListByRealname(user.getRealname(),watchname,typeId,brandId,page,limit);
+        PageInfo pageInfo=new PageInfo(list);
+        //封装返回接口
+        map.put("code","0");
+        map.put("msg","");
+        map.put("count",pageInfo.getTotal());
+        map.put("data",pageInfo.getList());
+        return map;
+    }
+
+    @RequestMapping("/order/refuse/history/data.json")
+    @ResponseBody
+    public Map getRefuseOrderHistoryData(String watchname, Integer typeId, Integer brandId, Integer page, Integer limit) {
+        Map map = new HashMap();
+        //获取登录人修理腕表类型id
+        User user = (User) SessionUtil.getPrimaryPrincipal();
+        //查询列表数据
+        List<Map> list=watchService.getRefuseOrderListByRealname(user.getRealname(),watchname,typeId,brandId,page,limit);
+        PageInfo pageInfo=new PageInfo(list);
+        //封装返回接口
+        map.put("code","0");
+        map.put("msg","");
+        map.put("count",pageInfo.getTotal());
+        map.put("data",pageInfo.getList());
+        return map;
+    }
 }

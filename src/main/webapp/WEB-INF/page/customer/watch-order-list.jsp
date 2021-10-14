@@ -72,33 +72,42 @@
 <script src="${basePath}/js/lay-config.js?v=1.0.4" charset="utf-8"></script>
 <script type="text/html" id="statusBtn">
     {{# if(d.status=='0'){ }}
-    <button class="layui-btn layui-btn-xs layui-btn-danger" style="cursor:default" disabled>等待总店接单</button>
+    <button class="layui-btn layui-btn-xs layui-btn-danger" style="cursor:default" disabled>等待总店接收</button>
     {{# } }}
     {{# if(d.status=='1'){ }}
-    <button class="layui-btn layui-btn-xs layui-btn-normal" lay-event="status">待付款</button>
+    <button class="layui-btn layui-btn-xs layui-btn-normal" style="cursor:default" disabled>等待总店审核</button>
     {{# } }}
     {{# if(d.status=='2'){ }}
-    <button class="layui-btn layui-btn-xs layui-btn-normal" style="cursor:default" disabled>待接收</button>
+    <button class="layui-btn layui-btn-xs layui-btn-normal" style="cursor:default" disabled>审核完成</button>
     {{# } }}
     {{# if(d.status=='3'){ }}
-    <button class="layui-btn layui-btn-xs layui-btn-normal" style="cursor:default" disabled>等待审核</button>
+    <button class="layui-btn layui-btn-xs layui-btn-normal" lay-event="status">待付款</button>
     {{# } }}
     {{# if(d.status=='4'){ }}
-    <button class="layui-btn layui-btn-xs layui-btn-warm" style="cursor:default" disabled>审核成功</button>
+    <button class="layui-btn layui-btn-xs layui-btn-warm" style="cursor:default" disabled>已拒绝</button>
     {{# } }}
     {{# if(d.status=='5'){ }}
-    <button class="layui-btn layui-btn-xs layui-btn-warm" style="cursor:default" disabled>待维修</button>
+    <button class="layui-btn layui-btn-xs layui-btn-warm" style="cursor:default" disabled>已付款</button>
     {{# } }}
     {{# if(d.status=='6'){ }}
-    <button class="layui-btn layui-btn-xs layui-btn-warm" style="cursor:default" disabled>维修中</button>
+    <button class="layui-btn layui-btn-xs layui-btn-warm" style="cursor:default" disabled>退款中</button>
     {{# } }}
     {{# if(d.status=='7'){ }}
-    <button class="layui-btn layui-btn-xs layui-btn-warm" style="cursor:default" disabled>维修完成</button>
+    <button class="layui-btn layui-btn-xs layui-btn-warm" style="cursor:default" disabled>已退款</button>
     {{# } }}
     {{# if(d.status=='8'){ }}
-    <button class="layui-btn layui-btn-xs layui-btn-warm" lay-event="status">待收货</button>
+    <button class="layui-btn layui-btn-xs layui-btn-warm" style="cursor:default" disabled>待维修</button>
     {{# } }}
     {{# if(d.status=='9'){ }}
+    <button class="layui-btn layui-btn-xs layui-btn-warm" style="cursor:default" disabled>维修中</button>
+    {{# } }}
+    {{# if(d.status=='10'){ }}
+    <button class="layui-btn layui-btn-xs layui-btn-warm" style="cursor:default" disabled>维修完成</button>
+    {{# } }}
+    {{# if(d.status=='11'){ }}
+    <button class="layui-btn layui-btn-xs layui-btn-warm" lay-event="status">待收货</button>
+    {{# } }}
+    {{# if(d.status=='12'){ }}
     <button class="layui-btn layui-btn-xs layui-btn-warm" style="cursor:default" disabled>订单完成</button>
     {{# } }}
 </script>
@@ -224,7 +233,7 @@
             var data = obj.data;
             //layer.alert(data.watchname)
             if (obj.event === 'edit') {
-                if(data.status==0 || data.status==1 || data.status==2 || data.status==3){
+                if(data.status==0 || data.status==1 ){
                     var index = layer.open({
                         title: '编辑腕表',
                         type: 2,
@@ -239,15 +248,15 @@
                     });
                     return false;
                 }else{
-                    layer.alert("腕表已完成审核或进入修理厂，不得更改信息",function (){
+                    layer.alert("腕表已完成审核或进入修理，不可编辑",function (){
                         window.location.reload();
                         layer.close(index);
                     })
                 }
             } else if (obj.event === 'refund') {
-                if(data.status==3 || data.status==4){
+                if(data.status==5){
                     var index = layer.open({
-                        title: '申请退款理由',
+                        title: '申请退款',
                         type: 2,
                         shade: 0.2,
                         maxmin:true,
@@ -259,8 +268,13 @@
                         layer.full(index);
                     });
                     return false;
-                }else if(data.status==0 || data.status==1 || data.status==2){
-                    layer.alert("商家还未接单或您还未付款，不可退款",function (){
+                }else if(data.status==0 || data.status==1 || data.status==2 || data.status==3 || data.status==4){
+                    layer.alert("未完成付款，不得退款",function (){
+                        window.location.reload();
+                        layer.close(index);
+                    })
+                }else if(data.status==6 || data.status==7){
+                    layer.alert("正在退款流程中，请勿重复进行退款",function (){
                         window.location.reload();
                         layer.close(index);
                     })
@@ -271,7 +285,7 @@
                     })
                 }
             }else if (obj.event==='status'){
-                if (data.status=='1')
+                if (data.status=='3')
                 {
                     layer.confirm("确认付款吗",function (index){
                         $.ajax({
@@ -297,7 +311,7 @@
                         });
                     });
 
-                }else if(data.status=='8'){
+                }else if(data.status=='11'){
                     layer.confirm("确认收货吗",function (index){
                         $.ajax({
                             type:"get",

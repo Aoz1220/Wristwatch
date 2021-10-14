@@ -4,7 +4,7 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>已完成记录</title>
+    <title>被拒绝订单记录</title>
     <meta name="renderer" content="webkit">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -77,7 +77,7 @@
 
         table.render({
             elem: '#currentTableId',
-            url: '${basePath}/customer/order/history/data.json',
+            url: '${basePath}/customer/order/refuse/history/data.json',
             toolbar: '#toolbarDemo',
             defaultToolbar: ['filter', 'exports', 'print',{
                 title:'导出模板',
@@ -86,13 +86,11 @@
             }],
             cols: [[
                 {type: 'numbers', width: 130, title: '序号', sort: true},
-                {field: 'finishtime', width: 200,  title: '订单完成时间',sort: true,templet:'<div>{{ layui.util.toDateString(d.finishtime, "yyyy-MM-dd HH:mm:ss") }}</div>'},
-                {field: 'watchname', width: 150, title: '腕表名称', align: "center"},
-                {field: 'typename', width: 150, title: '维修类型', sort: true},
-                {field: 'brandname', width: 150, title: '腕表品牌', sort: true},
-                {field: 'fixprice', width: 150, title: '维修价格(元)'},
-                {field: 'username', width: 200, title: '收货姓名'},
-                {field: 'useraddress', width: 200, title: '收货地址'},
+                {field: 'finishtime', width: 200,  title: '拒绝时间',sort: true,templet:'<div>{{ layui.util.toDateString(d.finishtime, "yyyy-MM-dd HH:mm:ss") }}</div>'},
+                {field: 'watchname', width: 200, title: '腕表名称', align: "center"},
+                {field: 'typename', width: 200, title: '维修类型', sort: true},
+                {field: 'brandname', width: 200, title: '腕表品牌', sort: true},
+                {field: 'refusereason', width: 250, title: '拒绝理由'},
             ]],
             limits: [5,10, 15, 20],
             limit: 5,

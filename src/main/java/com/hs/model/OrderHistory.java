@@ -10,6 +10,12 @@ public class OrderHistory {
 
     private Integer watchId;
 
+    private String refundReason;
+
+    private Integer refundPrice;
+
+    private String refuseReason;
+
     public Integer getId() {
         return id;
     }
@@ -32,5 +38,29 @@ public class OrderHistory {
 
     public void setWatchId(Integer watchId) {
         this.watchId = watchId;
+    }
+
+    public String getRefundReason() {
+        return refundReason;
+    }
+
+    public void setRefundReason(String refundReason) {
+        this.refundReason = refundReason;
+    }
+
+    public Integer getRefundPrice() {
+        return refundPrice;
+    }
+
+    public void setRefundPrice(Integer refundPrice) {
+        this.refundPrice = refundPrice;
+    }
+
+    public String getRefuseReason() {
+        return refuseReason;
+    }
+
+    public void setRefuseReason(String refuseReason) {
+        this.refuseReason = refuseReason;
     }
 }
