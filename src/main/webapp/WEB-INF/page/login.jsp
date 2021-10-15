@@ -60,9 +60,12 @@
                     <input type="checkbox" name="rememberMe" value="true" lay-skin="primary" title="自动登录" checked>
                 </div>
                 <div class="layui-form-item">
-                    <button class="layui-btn layui-btn layui-btn-normal layui-btn-fluid" lay-submit="" lay-filter="login">登 入</button>
+                    <button class="layui-btn layui-btn layui-btn-normal layui-btn-fluid" lay-submit="" lay-filter="login">登 录</button>
                 </div>
             </form>
+            <div class="layui-form-item">
+                <button class="layui-btn layui-btn layui-btn-normal layui-btn-fluid" lay-submit="" onclick="register()">客  户  注 册</button>
+            </div>
         </div>
     </div>
 </div>
@@ -74,6 +77,12 @@
     function reloadKaptcha(){
         document.getElementById("captchaPic").src = "${basePath}/kaptcha.jpg?flag="+new Date();//这个flag参数是为了防止页面缓存
     }
+
+    function register() {
+        window.location='${basePath}/register';
+    }
+
+
 
     layui.use(['form'], function () {
         var form = layui.form,

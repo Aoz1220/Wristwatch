@@ -64,10 +64,11 @@
   </delete>
 
   <insert id="insert" parameterType="com.hs.model.User" >
-    insert into user (id, username, password, role_id,type_id,tel
+    insert into user (id, username, password, role_id,type_id,tel,realname,balance
       )
     values (#{id,jdbcType=INTEGER}, #{username,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
-      #{roleId,jdbcType=INTEGER},#{typeId,jdbcType=INTEGER},  #{tel,jdbcType=VARCHAR}
+      #{roleId,jdbcType=INTEGER},#{typeId,jdbcType=INTEGER},  #{tel,jdbcType=VARCHAR},
+            #{realname,jdbcType=VARCHAR},#{balance,jdbcType=INTEGER}
            )
   </insert>
   <insert id="insertSelective" parameterType="com.hs.model.User" >
@@ -168,7 +169,7 @@
   <update id="RefundWatch" parameterType="map" >
     update user
     set balance = balance+#{fixprice}
-    where id = #{id}
+    where id = (select a.id from (select id from user where realname=(select user_name from watch where id=${watchId}))a)
   </update>
 
   <select id="selectBalanceById" resultType="Integer" parameterType="java.lang.Integer" >

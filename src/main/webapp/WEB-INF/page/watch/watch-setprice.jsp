@@ -135,14 +135,8 @@
                             //刷新父页面
                             parent.window.location.reload();
                         });
-                    }else if(data=="exist"){
-                        var index=layer.alert("腕表名称已存在，请重新输入!",function(){
-                            $("#watchname").focus();
-                            layer.close(index);
-                        });
-
                     }else{
-                        layer.alert("修改失败!");
+                        layer.alert("定价失败!");
                     }
                 }
             });

@@ -51,24 +51,30 @@ public class StatusConverter implements Converter<Integer> {
         String result = "";
         if (excelContentProperty.getField().getName().equals("status")){
             if (data == 0) {
-                result = "等待总店接单";
+                result = "待到店";
             } else if (data == 1) {
-                result = "待付款";
+                result = "审核中";
             } else if (data == 2) {
-                result = "待接收";
+                result = "审核完成";
             } else if (data == 3) {
-                result = "等待审核";
+                result = "待付款";
             }else if (data == 4) {
-                result = "审核成功";
+                result = "已拒绝";
             }else if (data == 5) {
-                result = "待维修";
+                result = "已付款";
             }else if (data == 6) {
-                result = "维修中";
+                result = "客户申请退款";
             }else if (data == 7) {
-                result = "维修完成";
+                result = "退款完成";
             }else if (data == 8) {
-                result = "待收货";
+                result = "待维修";
             }else if (data == 9) {
+                result = "维修中";
+            }else if (data == 10) {
+                result = "维修完成";
+            }else if (data == 11) {
+                result = "寄回中";
+            }else if (data == 12) {
                 result = "订单完成";
             }
         } else{//其他属性直接输出，注意只能双输出字符串，所以整型要转成String

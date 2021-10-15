@@ -97,6 +97,24 @@ public class UserServiceImpl implements UserService {
     }
 
     /**
+     * 保存注册用户
+     * @param
+     * @return
+     */
+    @Override
+    public int register(String username,String password,String realname,String tel) {
+        //设置默认密码并加密
+        User user=new User();
+        user.setUsername(username);
+        user.setPassword(MD5Utils.getMD5(password));
+        user.setRealname(realname);
+        user.setTel(tel);
+        user.setRoleId(4);
+        user.setBalance(0);
+        return userMapper.insert(user);
+    }
+
+    /**
      * 更新用户信息
      * @param user
      * @return
@@ -120,7 +138,7 @@ public class UserServiceImpl implements UserService {
 
     /**
      * 修改密码
-     * @param user
+     * @param
      * @return
      */
     @Override
@@ -153,9 +171,10 @@ public class UserServiceImpl implements UserService {
     public int  afterPay(Integer id, Integer fixprice) {
         return userMapper.PayWatchFix(id,fixprice);
     }
+
     @Override
-    public int  afterRefund(Integer id, Integer fixprice) {
-        return userMapper.RefundWatch(id,fixprice);
+    public int  afterRefund(Integer watchId, Integer fixprice) {
+        return userMapper.RefundWatch(watchId,fixprice);
     }
 
     @Override

@@ -11,4 +11,7 @@ public class Constants {
     public static final Integer WATCH_STATUS_7=7;//维修完成
     public static final Integer WATCH_STATUS_8=8;//待收货
     public static final Integer WATCH_STATUS_9=9;//订单完成
+    public static final Integer WATCH_STATUS_10=10;//待收货
+    public static final Integer WATCH_STATUS_11=11;//订单完成
+    public static final Integer WATCH_STATUS_12=12;//待收货
 }

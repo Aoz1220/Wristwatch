@@ -33,7 +33,7 @@ public interface UserMapper {
 
     int PayWatchFix(@Param("id")Integer id,@Param("fixprice") Integer fixprice);
 
-    int RefundWatch(@Param("id")Integer id,@Param("fixprice") Integer fixprice);
+    int RefundWatch(@Param("watchId")Integer watchId,@Param("fixprice") Integer fixprice);
 
     int selectBalanceById(@Param("id")Integer id);
 }

@@ -7,6 +7,8 @@ import java.util.Map;
 import java.util.Set;
 
 public interface UserService {
+    public int register(String username,String password,String realname,String tel);
+
     public User getUserByUsername(String username);
 
     public List<Role> getRoleAll();
@@ -33,7 +35,7 @@ public interface UserService {
 
     public int afterPay(Integer id,Integer fixprice);
 
-    public int afterRefund(Integer id,Integer fixprice);
+    public int afterRefund(Integer watchId,Integer fixprice);
 
     public int selectBalanceById(Integer id);
 }

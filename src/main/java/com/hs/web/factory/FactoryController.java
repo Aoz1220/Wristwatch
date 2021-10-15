@@ -56,7 +56,7 @@ public class FactoryController {
         //获取登录人修理腕表类型ID
         User user= (User)SessionUtil.getPrimaryPrincipal();
         //查询该类型腕表列表
-        List<Watch> list=watchService.getWatchList(user.getTypeId(),watchname,username,brandId, Constants.WATCH_STATUS_5,page,limit);
+        List<Watch> list=watchService.getWatchList(user.getTypeId(),watchname,username,brandId, Constants.WATCH_STATUS_8,page,limit);
         PageInfo<Watch> pageInfo=new PageInfo<Watch>(list);
         //封装返回接口
         map.put("code","0");
@@ -100,7 +100,7 @@ public class FactoryController {
         //获取登录人修理腕表类型id
         User user = (User) SessionUtil.getPrimaryPrincipal();
         //查询该类型腕表列表
-        List<Watch> list = watchService.getWatchListWithTime(user.getTypeId(),watchname,username,brandId, Constants.WATCH_STATUS_6,page,limit);
+        List<Watch> list = watchService.getWatchListWithTime(user.getTypeId(),watchname,username,brandId, Constants.WATCH_STATUS_9,page,limit);
         PageInfo<Watch> pageInfo = new PageInfo<Watch>(list);
 
         //封装返回接口
@@ -146,7 +146,7 @@ public class FactoryController {
         //获取登录人修理腕表类型id
         User user = (User) SessionUtil.getPrimaryPrincipal();
         //查询该类型腕表记录
-        List<Watch> list = watchService.getWatchListWithTime(user.getTypeId(),watchname,username,brandId, Constants.WATCH_STATUS_7,page,limit);
+        List<Watch> list = watchService.getWatchListWithTime(user.getTypeId(),watchname,username,brandId, Constants.WATCH_STATUS_10,page,limit);
         PageInfo<Watch> pageInfo = new PageInfo<Watch>(list);
 
         //封装返回接口

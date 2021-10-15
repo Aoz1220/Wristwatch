@@ -2,6 +2,7 @@ package com.hs.service;
 
 
 import com.hs.model.Brand;
+import com.hs.model.OrderHistory;
 import com.hs.model.Watch;
 
 import java.util.Date;
@@ -13,6 +14,13 @@ public interface WatchService {
 
     public List<Map> getWatchListByKeys(String watchname, Integer typeId, Integer brandId, Integer page, Integer limit);
 
+    public List<Map> getHistoryListByKeys(String watchname, Integer typeId, Integer brandId, Integer page, Integer limit);
+
+    public List<Map> getRefuseHistoryListByKeys(String watchname, Integer typeId, Integer brandId, Integer page, Integer limit);
+
+    public List<Map> getRefundHistoryListByKeys(String watchname, Integer typeId, Integer brandId, Integer page, Integer limit);
+
+
     public List<Watch> getAllWatchList();
 
     public List<Map> getWatchListByRealname(String realname,String watchname, Integer typeId, Integer brandId, Integer page, Integer limit);
@@ -21,7 +29,13 @@ public interface WatchService {
 
     public int refuseWatch(Integer id);
 
+    public int startRefundWatch(Integer id);
+
+    public int checkRefundWatch(Integer id);
+
     public Watch getWatchById(String id);
+
+    public OrderHistory getOrderHistoryByWatchId(String id);
 
     public int saveWatch(Watch watch);
 
@@ -45,6 +59,12 @@ public interface WatchService {
 
     public int updateWatchFixForStart(Integer watchId, Date startTime);
 
+    public int insertWatchOrderForRefund(Integer watchId, String refundreason);
+
+    public int insertWatchOrderForRefuse(Integer watchId, String refusereason,Date date);
+
+    public int updateWatchOrderForRefund(Integer watchId, String refundreason,Integer refundprice,Date date);
+
     public int updateWatchFixForEnd(Integer watchId, Date endTime);
 
     public int updateWatchForSendback(Integer[] ids);
@@ -55,5 +75,11 @@ public interface WatchService {
 
     public List<Map> getOrderListByRealname(String realname,String watchname, Integer typeId, Integer brandId, Integer page, Integer limit);
 
+    public List<Map> getRefundOrderListByRealname(String realname,String watchname, Integer typeId, Integer brandId, Integer page, Integer limit);
+
+    public List<Map> getRefuseOrderListByRealname(String realname,String watchname, Integer typeId, Integer brandId, Integer page, Integer limit);
+
     public int instoreWatch(Integer id);
+
+    public int scoreOrder(String watchname,String score);
 }

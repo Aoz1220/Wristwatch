@@ -22,17 +22,17 @@
         <form class="layui-form layui-form-pane" action="">
             <div class="layui-form layuimini-form">
                 <div class="layui-form-item">
-                    <label class="layui-form-label required" style="width: 150px">充值金额（元）</label>
+                    <label class="layui-form-label required" style="width: 200px">充值金额（元）<=10000</label>
                     <div class="layui-input-inline">
                         <input type="text" name="money" id="money" lay-verify="required|number" lay-reqtext="充值金额不能为空" placeholder="请输入充值金额"  class="layui-input">
-
                     </div>
                 </div>
 
                 <div class="layui-form-item">
-                    <label class="layui-form-label required" style="width: 150px">充值密码</label>
+                    <label class="layui-form-label required" style="width: 200px">充值密码</label>
                     <div class="layui-input-inline">
                         <input type="password" name="balancepassword" lay-verify="required" lay-reqtext="充值密码不能为空" placeholder="请输入充值密码"  class="layui-input">
+                        <label value="单次充值不能超过10000元"></label>
                     </div>
                 </div>
 
@@ -64,12 +64,11 @@
                 data:{"money":money},
                 dataType:"json",
                 success:function (data) {
-                    if(money>10000){
-                        layer.alert("单次充值不得超过10000元");
-                    }else if(balancepassword!="123"){
+                    if(data.code=="question"){
+                        layer.alert("单次充值数额不能超过10000元");
+                    } else if(balancepassword!="123"){
                         layer.alert("充值密码错误");
-                    }
-                    else if(data.code=="ok"){
+                    }else if(data.code=="ok"){
                         layer.alert(data.msg,function(){
                             layer.closeAll();
                         });

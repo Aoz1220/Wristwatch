@@ -4,7 +4,7 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>修理记录</title>
+    <title>已完成记录</title>
     <meta name="renderer" content="webkit">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -13,6 +13,11 @@
     <meta http-equiv="expires" content="0">
     <link rel="stylesheet" href="${basePath}/lib/layui-v2.6.3/css/layui.css" media="all">
     <link rel="stylesheet" href="${basePath}/css/public.css" media="all">
+    <style>
+        .layui-rate{
+            padding: 0px 5px 10px 0;
+        }
+    </style>
 </head>
 <body>
 <div class="layuimini-container">
@@ -30,9 +35,14 @@
                             </div>
                         </div>
                         <div class="layui-inline">
-                            <label class="layui-form-label">持有者姓名</label>
+                            <label class="layui-form-label">腕表类型</label>
                             <div class="layui-input-inline">
-                                <input type="text" name="username" autocomplete="off" class="layui-input">
+                                <select name="typeId" lay-filter="type" id="type">
+                                    <option value=""></option>
+                                    <c:forEach items="${typeList}" var="type">
+                                        <option value="${type.id}">${type.typeName}</option>
+                                    </c:forEach>
+                                </select>
                             </div>
                         </div>
                         <div class="layui-inline">
@@ -40,9 +50,6 @@
                             <div class="layui-input-inline">
                                 <select name="brandId" lay-filter="brand" id="brand">
                                     <option value=""></option>
-                                    <c:forEach items="${brandListAll}" var="brand">
-                                        <option value="${brand.id}">${brand.brandName}</option>
-                                    </c:forEach>
                                 </select>
                             </div>
                         </div>
@@ -65,17 +72,19 @@
     </div>
 </div>
 <script src="${basePath}/lib/layui-v2.6.3/layui.js" charset="utf-8"></script>
+
 <script>
-    layui.use(['form', 'table'], function () {
+    layui.use(['form', 'table','rate'], function () {
         var $ = layui.jquery,
             form = layui.form,
             table = layui.table,
-            upload=layui.upload;
+            upload=layui.upload,
+            rate=layui.rate;
 
 
         table.render({
             elem: '#currentTableId',
-            url: '${basePath}/factory/watch/history/data.json',
+            url: '${basePath}/store/watch/history/data.json',
             toolbar: '#toolbarDemo',
             defaultToolbar: ['filter', 'exports', 'print',{
                 title:'导出模板',
@@ -84,17 +93,17 @@
             }],
             cols: [[
                 {type: 'numbers', width: 130, title: '序号', sort: true},
-                {field: 'start_time', width: 200,  title: '开始维修时间',sort: true,templet:'<div>{{ layui.util.toDateString(d.start_time, "yyyy-MM-dd HH:mm:ss") }}</div>'},
-                {field: 'end_time', width: 200,  title: '结束维修时间',sort: true,templet:'<div>{{ layui.util.toDateString(d.end_time, "yyyy-MM-dd HH:mm:ss") }}</div>'},
-                {width: 120,  title: '维修天数',sort: true,templet: function (d){
-                        //向上取整
-                        return Math.ceil((d.end_time-d.start_time)/1000/60/60/24)+"天";
-                    }},
+                {field: 'finishtime', width: 200,  title: '订单完成时间',sort: true,templet:'<div>{{ layui.util.toDateString(d.finishtime, "yyyy-MM-dd HH:mm:ss") }}</div>'},
                 {field: 'watchname', width: 150, title: '腕表名称', align: "center"},
                 {field: 'typename', width: 150, title: '维修类型', sort: true},
                 {field: 'brandname', width: 150, title: '腕表品牌', sort: true},
                 {field: 'fixprice', width: 150, title: '维修价格(元)'},
-                {field: 'username', width: 200, title: '持有者姓名'},
+                {field: 'username', width: 200, title: '收货姓名'},
+                {field: 'useraddress', width: 200, title: '收货地址'},
+                {field: 'score', width: 230,title: '评分',templet:function(d){
+                        return '<div  id="score'+d.id +'"></div>';
+                    }},
+                {field: 'scoretime', width: 200,  title: '评分时间',sort: true,templet:"#scoretime"},
             ]],
             limits: [5,10, 15, 20],
             limit: 5,
@@ -113,7 +122,79 @@
                     "count":res.count,//解析数据长度
                     "data": result//解析数据列表
                 };
-            },
+            },done:function(e){
+                    var data =e.data;
+                    for(var item in data){
+                        var star=rate.render({
+                                elem: '#score'+data[item].id
+                                ,value: data[item].score
+                                ,text: true
+                                ,theme: '#FFB800'
+                                ,readonly: true
+                                ,setText: function(value){ //自定义文本的回调
+                                    var arrs = {
+                                        '0':'暂未评分'
+                                        ,'1': '差'
+                                        ,'2': '较差'
+                                        ,'3': '一般'
+                                        ,'4': '真不错'
+                                        ,'5': '好极了'
+                                    };
+                                    this.span.text(arrs[value]);
+                                }
+                                //选定时调用，评分时发送一个ajax,readonly设为true
+                                , choose: function (value) {
+                                    alert("感谢评分，我们会继续加油");
+                                }
+                        })
+                    }
+                }
+            ,id:'flinklist'
+        });
+
+        /*条件筛选*/
+        $('#searchBtn').on('click',function(){
+            var type = $(this).data('type');
+            active[type] ? active[type].call(this) : '';
+        });
+        // 点击获取数据
+        var  active = {
+            searchFor: function () {
+                var search=$("input[name='search']").val();
+                var score=$("#score option:selected").val();
+                table.reload('flinklist', {
+                    where: {
+                        'search':search
+                        ,'score':score
+                    }
+                });
+            }
+        };
+
+        /*给腕表类型下拉框绑定change事件*/
+        form.on('select(type)',function(data){
+            //清空品牌下拉框
+            $("#brand").html("<option value=''></option>");
+
+            $.ajax({
+                type:"get",
+                url:"${basePath}/store/watch/list/brand.json",
+                data:{'typeId':data.value},
+                dataType:"json",
+                success:function(data){
+                    if(data!=null){
+                        //初始化品牌下拉框
+                        if(data.brands!=null && data.brands.length>0){
+                            var brands=data.brands;
+                            $.each(brands,function (index,item) {
+                                $("#brand").append(new Option(item.brandName,item.id))
+                            })
+                        }
+                    }
+                    //重新初始化select组件
+                    form.render('select');
+                }
+            });
         });
 
         // 监听搜索操作
@@ -125,7 +206,7 @@
                 }
                 , where: {
                     'watchname':data.field.watchname,
-                    'username':data.field.username,
+                    'typeId':data.field.typeId,
                     'brandId':data.field.brandId
                 }
             }, 'data');
@@ -134,6 +215,12 @@
         });
     });
 </script>
-
+<script type="text/html" id="scoretime">
+    {{#  if(d.scoretime !=null){ }}
+    <div>{{layui.util.toDateString(d.scoretime, 'yyyy-MM-dd HH:mm:ss')}}</div>
+    {{#  } else {}}
+    <div>{{}}</div>
+    {{#  } }}
+</script>
 </body>
 </html>

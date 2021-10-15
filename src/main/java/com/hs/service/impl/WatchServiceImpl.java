@@ -1,5 +1,6 @@
 package com.hs.service.impl;
 
+import com.alibaba.excel.event.Order;
 import com.github.pagehelper.PageHelper;
 import com.hs.common.Constants;
 import com.hs.mapper.BrandMapper;
@@ -35,6 +36,25 @@ public class WatchServiceImpl implements WatchService {
         return watchMapper.selectByKeys(watchname,typeId,brandId);
     }
 
+    @Override
+    public List<Map> getHistoryListByKeys(String watchname, Integer typeId, Integer brandId, Integer page, Integer limit) {
+        //执行分页查询
+        PageHelper.startPage(page,limit);
+        return watchMapper.selectHistoryByKeys(watchname,typeId,brandId);
+    }
+    @Override
+    public List<Map> getRefuseHistoryListByKeys(String watchname, Integer typeId, Integer brandId, Integer page, Integer limit) {
+        //执行分页查询
+        PageHelper.startPage(page,limit);
+        return watchMapper.selectRefuseHistoryByKeys(watchname,typeId,brandId);
+    }
+    @Override
+    public List<Map> getRefundHistoryListByKeys(String watchname, Integer typeId, Integer brandId, Integer page, Integer limit) {
+        //执行分页查询
+        PageHelper.startPage(page,limit);
+        return watchMapper.selectRefundHistoryByKeys(watchname,typeId,brandId);
+    }
+
     /**
      * 查询腕表品牌列表
      * @param typeId
@@ -52,7 +72,7 @@ public class WatchServiceImpl implements WatchService {
      */
     @Override
     public int refuseWatch(Integer id) {
-        return watchMapper.deleteByPrimaryKey(id);
+        return watchMapper.refuseWatchById(id);
     }
 
     /**
@@ -78,6 +98,20 @@ public class WatchServiceImpl implements WatchService {
         //参数合法性判断
         if(StringUtils.isNotBlank(id)) {
             return watchMapper.selectById(id);
+        }
+        return null;
+    }
+
+    /**
+     * 根据id查询腕表信息
+     * @param id
+     * @return
+     */
+    @Override
+    public OrderHistory getOrderHistoryByWatchId(String id) {
+        //参数合法性判断
+        if(StringUtils.isNotBlank(id)) {
+            return orderHistoryMapper.selectByWatchId(id);
         }
         return null;
     }
@@ -147,6 +181,68 @@ public class WatchServiceImpl implements WatchService {
     }
 
     /**
+     * 开始退款
+     * @param id
+     * @return
+     */
+    @Override
+    public int startRefundWatch(Integer id) {
+        return watchMapper.startRefundWatchById(id);
+    }
+
+    /**
+     * 确认退款
+     * @param id
+     * @return
+     */
+    @Override
+    public int checkRefundWatch(Integer id) {
+        return watchMapper.checkRefundWatchById(id);
+    }
+    /**
+     * 开始退款
+     * @param watchId
+     * @return
+     */
+    @Override
+    public int insertWatchOrderForRefund(Integer watchId,String refundreason) {
+        OrderHistory orderHistory=new OrderHistory();
+        orderHistory.setRefundReason(refundreason);
+        orderHistory.setWatchId(watchId);
+        return orderHistoryMapper.insertWatchOrderForRefund(orderHistory);
+    }
+
+    /**
+     * 拒绝维修
+     * @param watchId
+     * @return
+     */
+    @Override
+    public int insertWatchOrderForRefuse(Integer watchId,String refusereason,Date date) {
+        OrderHistory orderHistory=new OrderHistory();
+        orderHistory.setRefuseReason(refusereason);
+        orderHistory.setWatchId(watchId);
+        orderHistory.setFinishTime(date);
+        return orderHistoryMapper.insertWatchOrderForRefuse(orderHistory);
+    }
+
+    /**
+     * 确认退款
+     * @param watchId
+     * @return
+     */
+    @Override
+    public int updateWatchOrderForRefund(Integer watchId,String refundreason,Integer refundprice,Date date) {
+        OrderHistory orderHistory=new OrderHistory();
+        orderHistory.setRefundReason(refundreason);
+        orderHistory.setRefundPrice(refundprice);
+        orderHistory.setFinishTime(date);
+        orderHistory.setWatchId(watchId);
+        return orderHistoryMapper.updateWatchOrderForRefund(orderHistory);
+    }
+
+
+    /**
      * 付款
      * @param id
      * @return
@@ -182,7 +278,7 @@ public class WatchServiceImpl implements WatchService {
             //1.更新腕表维修状态
             Watch watch=new Watch();
             watch.setId(watchId);
-            watch.setStatus(Constants.WATCH_STATUS_6);
+            watch.setStatus(Constants.WATCH_STATUS_9);
             result+= watchMapper.updateByPrimaryKeySelective(watch);
             //2.保存腕表维修开始时间
             FixHistory fixHistory=new FixHistory();
@@ -207,7 +303,7 @@ public class WatchServiceImpl implements WatchService {
             //1.更新腕表维修状态
             Watch watch=new Watch();
             watch.setId(watchId);
-            watch.setStatus(Constants.WATCH_STATUS_7);
+            watch.setStatus(Constants.WATCH_STATUS_10);
             result+= watchMapper.updateByPrimaryKeySelective(watch);
             //2.保存腕表维修结束时间
             FixHistory fixHistory=new FixHistory();
@@ -290,6 +386,7 @@ public class WatchServiceImpl implements WatchService {
             OrderHistory orderHistory=new OrderHistory();
             orderHistory.setFinishTime(endTime);
             orderHistory.setWatchId(id);
+            orderHistory.setScore("0");
             result+=orderHistoryMapper.insertSelective(orderHistory);
         }
         return result;
@@ -300,6 +397,20 @@ public class WatchServiceImpl implements WatchService {
         //执行分页查询
         PageHelper.startPage(page,limit);
         return watchMapper.selectOrderByRealname(realname,watchname,typeId,brandId);
+    }
+
+    @Override
+    public List<Map> getRefundOrderListByRealname(String realname,String watchname, Integer typeId, Integer brandId, Integer page, Integer limit) {
+        //执行分页查询
+        PageHelper.startPage(page,limit);
+        return watchMapper.selectRefundOrderByRealname(realname,watchname,typeId,brandId);
+    }
+
+    @Override
+    public List<Map> getRefuseOrderListByRealname(String realname,String watchname, Integer typeId, Integer brandId, Integer page, Integer limit) {
+        //执行分页查询
+        PageHelper.startPage(page,limit);
+        return watchMapper.selectRefuseOrderByRealname(realname,watchname,typeId,brandId);
     }
 
     /**
@@ -317,5 +428,15 @@ public class WatchServiceImpl implements WatchService {
         List<Watch> list=null;
         list=watchMapper.selectAll();
         return list;
+    }
+
+    /**
+     * 评分
+     * @param
+     * @return
+     */
+    @Override
+    public int scoreOrder(String watchname,String score) {
+        return orderHistoryMapper.scoreOrder(watchname,score,new Date());
     }
 }

@@ -21,17 +21,29 @@
 <div class="layui-form layuimini-form">
     <form class="layui-form" action="">
         <div class="layui-form-item layui-form-text">
-            <label class="layui-form-label">申请退款理由*</label>
+            <label class="layui-form-label" style="width: 150px">申请退款理由</label>
             <div class="layui-input-block">
-
-                <textarea name="refundreason" id="refundreason" placeholder="请输入退款理由" lay-verify="required" lay-reqtext="拒绝理由不能为空" class="layui-textarea"></textarea>
+                <textarea name="refundReason" id="refundReason"   class="layui-textarea" disabled="disabled"></textarea>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label class="layui-form-label required" style="width: 150px">原维修金额(元)<span class="star">*</span></label>
+                <div class="layui-input-inline">
+                    <input type="text" name="fixprice" value="${watch.fixprice}" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-inline">
+                <label class="layui-form-label required" style="width: 150px">退款金额(元)<span class="star">*</span></label>
+                <div class="layui-input-inline">
+                    <input type="text" name="refundprice" lay-verify="required|number" lay-reqtext="退款金额不能为空" autocomplete="off" class="layui-input">
+                </div>
             </div>
         </div>
         <div class="layui-form-item">
             <div class="layui-input-block">
                 <input  type="hidden" name="watchId" id="watchId" value="${watch.id}">
-                <input  type="hidden" name="fixprice" value="${watch.fixprice}">
-                <button class="layui-btn layui-btn-normal" lay-submit lay-filter="saveBtn">确认申请退款</button>
+                <button class="layui-btn layui-btn-normal" lay-submit lay-filter="saveBtn">确认退款</button>
             </div>
         </div>
     </form>
@@ -43,18 +55,25 @@
             layer = layui.layer,
             $ = layui.jquery;
 
+        document.getElementById("refundReason").value="${orderHistory.refundReason}";
+
 
         //监听提交
         form.on('submit(saveBtn)', function (data) {
-            layer.confirm('真的退款吗？', function (index) {
+            layer.confirm('确认退款吗？', function (index) {
                 $.ajax({
                     type:"post",
-                    url:"${basePath}/store/watch/startrefund",
+                    url:"${basePath}/store/watch/checkrefund",
                     data:data.field,
                     dataType:"json",
                     success:function(data){
-                        if(data.code=="error"){
-                            layer.alert("退款申请提交失败!",function(){
+                        if(data.code=="question"){
+                            layer.alert("退款金额不能大于原维修金额",function(){
+                                window.location.reload();
+                                layer.close(index);
+                            });
+                        }else if(data.code=="error"){
+                            layer.alert("退款失败!",function(){
                                 window.location.reload();
                                 layer.close(index);
                             });

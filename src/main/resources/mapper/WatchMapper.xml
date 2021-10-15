@@ -23,9 +23,9 @@
   </select>
 
   <select id="selectAll" resultMap="BaseResultMap">
-    select
+    SELECT
     <include refid="Base_Column_List" />
-    from watch where status!=9 order by id desc limit 0,5
+    FROM watch WHERE STATUS!=4 AND STATUS!=7 AND STATUS!=12  ORDER BY id DESC LIMIT 0,5
   </select>
 
   <!--根据条件查询腕表信息-->
@@ -34,7 +34,64 @@
     t1.id,t1.watchname,t1.fixprice,t1.status,t1.user_address useraddress,t1.user_name username,t1.user_tel usertel,t2.type_name typename,t3.brand_name brandname
     from watch t1 left join type t2 on t1.type=t2.id
     left join brand t3 on t1.brand=t3.id
-    where 1=1 and t1.status!=9
+    where 1=1 and t1.status!=4 and t1.status!=7 and t1.status!=12
+    <if test="watchname!=null and watchname!=''">
+      and t1.watchname like '%${watchname}%'
+    </if>
+    <if test="typeId!=null and typeId>0">
+      and t1.type =#{typeId}
+    </if>
+    <if test="brandId!=null and brandId>0">
+      and t1.brand =#{brandId}
+    </if>
+    order by t1.id desc
+  </select>
+
+  <select id="selectHistoryByKeys" resultType="map" parameterType="map" >
+    select
+    t1.id,t1.watchname,t1.fixprice,t1.status,t1.user_address useraddress,t1.user_name username,t1.user_tel usertel,t2.type_name typename,t3.brand_name brandname,t4.finish_time finishtime,t4.score,t4.score_time scoretime
+    from watch t1 left join type t2 on t1.type=t2.id
+    left join brand t3 on t1.brand=t3.id
+    left join order_history t4 on t1.id=t4.watch_id
+    where t1.status=12
+    <if test="watchname!=null and watchname!=''">
+      and t1.watchname like '%${watchname}%'
+    </if>
+    <if test="typeId!=null and typeId>0">
+      and t1.type =#{typeId}
+    </if>
+    <if test="brandId!=null and brandId>0">
+      and t1.brand =#{brandId}
+    </if>
+    order by t1.id desc
+  </select>
+
+  <select id="selectRefuseHistoryByKeys" resultType="map" parameterType="map" >
+    select
+    t1.id,t1.watchname,t1.fixprice,t1.status,t1.user_name username,t2.type_name typename,t3.brand_name brandname,t4.finish_time finishtime,t4.refuse_reason refusereason
+    from watch t1 left join type t2 on t1.type=t2.id
+    left join brand t3 on t1.brand=t3.id
+    left join order_history t4 on t1.id=t4.watch_id
+    where t1.status=4
+    <if test="watchname!=null and watchname!=''">
+      and t1.watchname like '%${watchname}%'
+    </if>
+    <if test="typeId!=null and typeId>0">
+      and t1.type =#{typeId}
+    </if>
+    <if test="brandId!=null and brandId>0">
+      and t1.brand =#{brandId}
+    </if>
+    order by t1.id desc
+  </select>
+
+  <select id="selectRefundHistoryByKeys" resultType="map" parameterType="map" >
+    select
+    t1.id,t1.watchname,t1.fixprice,t1.status,t1.user_name username,t2.type_name typename,t3.brand_name brandname,t4.finish_time finishtime,t4.refund_reason refundreason,t4.refund_price refundprice
+    from watch t1 left join type t2 on t1.type=t2.id
+    left join brand t3 on t1.brand=t3.id
+    left join order_history t4 on t1.id=t4.watch_id
+    where t1.status=7
     <if test="watchname!=null and watchname!=''">
       and t1.watchname like '%${watchname}%'
     </if>
@@ -53,7 +110,7 @@
     t1.id,t1.watchname,t1.fixprice,t1.status,t1.user_address useraddress,t1.user_name username,t1.user_tel usertel,t2.type_name typename,t3.brand_name brandname
     from watch t1 left join type t2 on t1.type=t2.id
     left join brand t3 on t1.brand=t3.id
-    where t1.user_name=#{realname} and t1.status!=9
+    where t1.user_name=#{realname} and t1.status!=4 and t1.status!=7 and t1.status!=12
     <if test="watchname!=null and watchname!=''">
       and t1.watchname like '%${watchname}%'
     </if>
@@ -71,6 +128,14 @@
     <include refid="Base_Column_List" />
     from watch
     where id = #{id}
+  </select>
+
+  <!--根据腕表名称查询腕表信息-->
+  <select id="selectByWatchname" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select
+    <include refid="Base_Column_List" />
+    from watch
+    where watchname=#{watchname}
   </select>
 
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
@@ -194,7 +259,7 @@
         fixprice = #{fixprice,jdbcType=INTEGER},
       </if>
       <if test="1==1" >
-        status = 1,
+        status = 3,
       </if>
       <if test="userAddress != null" >
         user_address = #{userAddress,jdbcType=VARCHAR},
@@ -231,7 +296,7 @@
         <foreach collection="ids" item="id" open="id in(" separator="," close=")">
           #{id}
         </foreach>
-        and status in (0,1,2,3,5,6,7,8,9)
+        and status in (0,1,2,3,4,6,7,8,9,10,11,12)
       </if>
     </where>
   </select>
@@ -239,7 +304,7 @@
   <!--下放到维修厂-->
   <update id="updateForPushFactoryByIds" parameterType="map" >
     update watch
-    set status=5
+    set status=8
     <where>
       <if test="ids!=null">
         <foreach collection="ids" item="id" open="id in(" separator="," close=")">
@@ -251,13 +316,13 @@
 
   <update id="checkWatchById" parameterType="java.lang.Integer" >
     update watch
-    set status=4
+    set status=2
     where id = #{id,jdbcType=INTEGER}
   </update>
 
   <update id="payWatchById" parameterType="java.lang.Integer" >
     update watch
-    set status=2
+    set status=5
     where id = #{id,jdbcType=INTEGER}
   </update>
 
@@ -288,7 +353,13 @@
     left join type t2 on t1.type=t2.id
     left join brand t3 on t1.brand=t3.id
     left join fix_history t4 on t1.id=t4.watch_id
-    where t2.id=#{typeId} and t1.status=#{status} or t1.status=8 or t1.status=9
+    where t2.id=#{typeId} and
+    <if test="status==9">
+      t1.status=#{status}
+    </if>
+    <if test="status==10">
+      (t1.status=#{status} or t1.status=11 or t1.status=12)
+    </if>
     <if test="watchname!=null and watchname!=''">
       and t1.watchname like '%${watchname}%'
     </if>
@@ -310,7 +381,7 @@
         <foreach collection="ids" item="id" open="id in(" separator="," close=")">
           #{id}
         </foreach>
-        and status in (0,1,2,3,4,5,6,8,9)
+        and status in (0,1,2,3,4,5,6,7,8,9,11,12)
       </if>
     </where>
   </select>
@@ -318,7 +389,7 @@
   <!--寄回腕表-->
   <update id="updateForSendbackByIds" parameterType="map" >
     update watch
-    set status=8
+    set status=11
     <where>
       <if test="ids!=null">
         <foreach collection="ids" item="id" open="id in(" separator="," close=")">
@@ -331,18 +402,72 @@
   <!--客户收货-->
   <update id="updateForReceiveById" parameterType="java.lang.Integer" >
     update watch
-    set status=9
+    set status=12
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+  <!--开始退款-->
+  <update id="startRefundWatchById" parameterType="java.lang.Integer" >
+    update watch
+    set status=6
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+  <!--确认退款-->
+  <update id="checkRefundWatchById" parameterType="java.lang.Integer" >
+    update watch
+    set status=7
     where id = #{id,jdbcType=INTEGER}
   </update>
 
   <!--根据真实姓名以及条件查询腕表订单信息-->
   <select id="selectOrderByRealname" resultType="map" parameterType="map" >
     select
-    t1.id,t1.watchname,t1.fixprice,t1.status,t1.user_address useraddress,t1.user_name username,t1.user_tel usertel,t2.type_name typename,t3.brand_name brandname,t4.finish_time finishtime
+    t1.id,t1.watchname,t1.fixprice,t1.status,t1.user_address useraddress,t1.user_name username,t1.user_tel usertel,t2.type_name typename,t3.brand_name brandname,t4.finish_time finishtime,t4.score,t4.score_time scoretime
     from watch t1 left join type t2 on t1.type=t2.id
     left join brand t3 on t1.brand=t3.id
     left join order_history t4 on t1.id=t4.watch_id
-    where t1.user_name=#{realname} and t1.status=9
+    where t1.user_name=#{realname} and t1.status=12
+    <if test="watchname!=null and watchname!=''">
+      and t1.watchname like '%${watchname}%'
+    </if>
+    <if test="typeId!=null and typeId>0">
+      and t1.type =#{typeId}
+    </if>
+    <if test="brandId!=null and brandId>0">
+      and t1.brand =#{brandId}
+    </if>
+    order by t1.id desc
+  </select>
+
+  <!--根据真实姓名以及条件查询退款腕表订单信息-->
+  <select id="selectRefundOrderByRealname" resultType="map" parameterType="map" >
+    select
+    t1.id,t1.watchname,t1.fixprice,t1.status,t1.user_name username,t2.type_name typename,t3.brand_name brandname,t4.finish_time finishtime,t4.refund_reason refundreason,t4.refund_price refundprice
+    from watch t1 left join type t2 on t1.type=t2.id
+    left join brand t3 on t1.brand=t3.id
+    left join order_history t4 on t1.id=t4.watch_id
+    where t1.user_name=#{realname} and t1.status=7
+    <if test="watchname!=null and watchname!=''">
+      and t1.watchname like '%${watchname}%'
+    </if>
+    <if test="typeId!=null and typeId>0">
+      and t1.type =#{typeId}
+    </if>
+    <if test="brandId!=null and brandId>0">
+      and t1.brand =#{brandId}
+    </if>
+    order by t1.id desc
+  </select>
+
+  <!--根据真实姓名以及条件查询退款腕表订单信息-->
+  <select id="selectRefuseOrderByRealname" resultType="map" parameterType="map" >
+    select
+    t1.id,t1.watchname,t1.fixprice,t1.status,t1.user_name username,t2.type_name typename,t3.brand_name brandname,t4.finish_time finishtime,t4.refuse_reason refusereason
+    from watch t1 left join type t2 on t1.type=t2.id
+    left join brand t3 on t1.brand=t3.id
+    left join order_history t4 on t1.id=t4.watch_id
+    where t1.user_name=#{realname} and t1.status=4
     <if test="watchname!=null and watchname!=''">
       and t1.watchname like '%${watchname}%'
     </if>
@@ -357,7 +482,13 @@
 
   <update id="instoreWatchById" parameterType="java.lang.Integer" >
     update watch
-    set status=3
+    set status=1
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+  <update id="refuseWatchById" parameterType="java.lang.Integer" >
+    update watch
+    set status=4
     where id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>

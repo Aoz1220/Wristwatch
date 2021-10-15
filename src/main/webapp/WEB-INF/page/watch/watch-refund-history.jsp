@@ -4,7 +4,7 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>修理记录</title>
+    <title>退款订单记录</title>
     <meta name="renderer" content="webkit">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -30,9 +30,14 @@
                             </div>
                         </div>
                         <div class="layui-inline">
-                            <label class="layui-form-label">持有者姓名</label>
+                            <label class="layui-form-label">腕表类型</label>
                             <div class="layui-input-inline">
-                                <input type="text" name="username" autocomplete="off" class="layui-input">
+                                <select name="typeId" lay-filter="type" id="type">
+                                    <option value=""></option>
+                                    <c:forEach items="${typeList}" var="type">
+                                        <option value="${type.id}">${type.typeName}</option>
+                                    </c:forEach>
+                                </select>
                             </div>
                         </div>
                         <div class="layui-inline">
@@ -40,9 +45,6 @@
                             <div class="layui-input-inline">
                                 <select name="brandId" lay-filter="brand" id="brand">
                                     <option value=""></option>
-                                    <c:forEach items="${brandListAll}" var="brand">
-                                        <option value="${brand.id}">${brand.brandName}</option>
-                                    </c:forEach>
                                 </select>
                             </div>
                         </div>
@@ -75,7 +77,7 @@
 
         table.render({
             elem: '#currentTableId',
-            url: '${basePath}/factory/watch/history/data.json',
+            url: '${basePath}/store/watch/refund/history/data.json',
             toolbar: '#toolbarDemo',
             defaultToolbar: ['filter', 'exports', 'print',{
                 title:'导出模板',
@@ -84,17 +86,13 @@
             }],
             cols: [[
                 {type: 'numbers', width: 130, title: '序号', sort: true},
-                {field: 'start_time', width: 200,  title: '开始维修时间',sort: true,templet:'<div>{{ layui.util.toDateString(d.start_time, "yyyy-MM-dd HH:mm:ss") }}</div>'},
-                {field: 'end_time', width: 200,  title: '结束维修时间',sort: true,templet:'<div>{{ layui.util.toDateString(d.end_time, "yyyy-MM-dd HH:mm:ss") }}</div>'},
-                {width: 120,  title: '维修天数',sort: true,templet: function (d){
-                        //向上取整
-                        return Math.ceil((d.end_time-d.start_time)/1000/60/60/24)+"天";
-                    }},
+                {field: 'finishtime', width: 200,  title: '退款时间',sort: true,templet:'<div>{{ layui.util.toDateString(d.finishtime, "yyyy-MM-dd HH:mm:ss") }}</div>'},
                 {field: 'watchname', width: 150, title: '腕表名称', align: "center"},
                 {field: 'typename', width: 150, title: '维修类型', sort: true},
                 {field: 'brandname', width: 150, title: '腕表品牌', sort: true},
-                {field: 'fixprice', width: 150, title: '维修价格(元)'},
-                {field: 'username', width: 200, title: '持有者姓名'},
+                {field: 'fixprice', width: 150, title: '原维修价格(元)'},
+                {field: 'refundprice', width: 150, title: '退回金额(元)'},
+                {field: 'refundreason', width: 200, title: '退款理由'},
             ]],
             limits: [5,10, 15, 20],
             limit: 5,
@@ -116,6 +114,32 @@
             },
         });
 
+        /*给腕表类型下拉框绑定change事件*/
+        form.on('select(type)',function(data){
+            //清空品牌下拉框
+            $("#brand").html("<option value=''></option>");
+
+            $.ajax({
+                type:"get",
+                url:"${basePath}/store/watch/list/brand.json",
+                data:{'typeId':data.value},
+                dataType:"json",
+                success:function(data){
+                    if(data!=null){
+                        //初始化品牌下拉框
+                        if(data.brands!=null && data.brands.length>0){
+                            var brands=data.brands;
+                            $.each(brands,function (index,item) {
+                                $("#brand").append(new Option(item.brandName,item.id))
+                            })
+                        }
+                    }
+                    //重新初始化select组件
+                    form.render('select');
+                }
+            });
+        });
+
         // 监听搜索操作
         form.on('submit(data-search-btn)', function (data) {
             //执行搜索重载
@@ -125,7 +149,7 @@
                 }
                 , where: {
                     'watchname':data.field.watchname,
-                    'username':data.field.username,
+                    'typeId':data.field.typeId,
                     'brandId':data.field.brandId
                 }
             }, 'data');

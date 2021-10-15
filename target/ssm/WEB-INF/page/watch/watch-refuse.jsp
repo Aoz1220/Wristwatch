@@ -23,13 +23,12 @@
         <div class="layui-form-item layui-form-text">
             <label class="layui-form-label">拒绝维修理由*</label>
             <div class="layui-input-block">
-
-                <textarea placeholder="请输入拒绝理由" lay-verify="required" lay-reqtext="拒绝理由不能为空" class="layui-textarea"></textarea>
+                <textarea name="refusereason" id="refundreason" placeholder="请输入拒绝理由" lay-verify="required" lay-reqtext="拒绝理由不能为空" class="layui-textarea"></textarea>
             </div>
         </div>
         <div class="layui-form-item">
             <div class="layui-input-block">
-                <input  type="hidden" name="id" value="${watch.id}">
+                <input  type="hidden" name="watchId" value="${watch.id}">
                 <button class="layui-btn layui-btn-normal" lay-submit lay-filter="saveBtn">确认拒绝维修</button>
             </div>
         </div>

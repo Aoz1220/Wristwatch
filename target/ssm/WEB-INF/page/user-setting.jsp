@@ -74,6 +74,10 @@
             document.getElementById("realnamearea").style.visibility="visible"
             document.getElementById("balancearea").style.visibility="visible"
         }
+        var s2=document.getElementById("balance");
+        if(s2.value==""){
+            document.getElementById("balance").value="0";
+        }
 
 
 

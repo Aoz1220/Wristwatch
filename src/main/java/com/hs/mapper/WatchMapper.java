@@ -27,6 +27,12 @@ public interface WatchMapper {
 
     List<Map> selectByKeys(@Param("watchname") String watchname, @Param("typeId") Integer typeId, @Param("brandId") Integer brandId);
 
+    List<Map> selectHistoryByKeys(@Param("watchname") String watchname, @Param("typeId") Integer typeId, @Param("brandId") Integer brandId);
+
+    List<Map> selectRefundHistoryByKeys(@Param("watchname") String watchname, @Param("typeId") Integer typeId, @Param("brandId") Integer brandId);
+
+    List<Map> selectRefuseHistoryByKeys(@Param("watchname") String watchname, @Param("typeId") Integer typeId, @Param("brandId") Integer brandId);
+
     List<Map> selectByRealname(@Param("realname") String realname,@Param("watchname") String watchname, @Param("typeId") Integer typeId, @Param("brandId") Integer brandId);
 
     Watch selectById(String id);
@@ -36,6 +42,10 @@ public interface WatchMapper {
     int updateForPushFactoryByIds(@Param("ids") Integer[] ids);
 
     int checkWatchById(Integer id);
+
+    int startRefundWatchById(Integer id);
+
+    int checkRefundWatchById(Integer id);
 
     int payWatchById(Integer id);
 
@@ -51,5 +61,11 @@ public interface WatchMapper {
 
     List<Map> selectOrderByRealname(@Param("realname") String realname,@Param("watchname") String watchname, @Param("typeId") Integer typeId, @Param("brandId") Integer brandId);
 
+    List<Map> selectRefundOrderByRealname(@Param("realname") String realname,@Param("watchname") String watchname, @Param("typeId") Integer typeId, @Param("brandId") Integer brandId);
+
+    List<Map> selectRefuseOrderByRealname(@Param("realname") String realname,@Param("watchname") String watchname, @Param("typeId") Integer typeId, @Param("brandId") Integer brandId);
+
     int instoreWatchById(Integer id);
+
+    int refuseWatchById(Integer id);
 }

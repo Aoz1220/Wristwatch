@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -41,6 +42,45 @@ public class WatchController {
         return "watch/watch-list";
     }
 
+    /**
+     * 跳转到腕表列表界面
+     * @return
+     */
+    @RequestMapping("/watch/history")
+    public String toWatchHistoryList(Model model){
+        //腕表类型下拉框数据
+        List<Type> typeList=userService.getTypeAll();
+        //参数返回页面
+        model.addAttribute("typeList",typeList);
+
+        return "watch/watch-history";
+    }
+    /**
+     * 跳转到腕表列表界面
+     * @return
+     */
+    @RequestMapping("/watch/refuse/history")
+    public String toWatchRefuseHistoryList(Model model){
+        //腕表类型下拉框数据
+        List<Type> typeList=userService.getTypeAll();
+        //参数返回页面
+        model.addAttribute("typeList",typeList);
+
+        return "watch/watch-refuse-history";
+    }
+    /**
+     * 跳转到腕表列表界面
+     * @return
+     */
+    @RequestMapping("/watch/refund/history")
+    public String toWatchRefundHistoryList(Model model){
+        //腕表类型下拉框数据
+        List<Type> typeList=userService.getTypeAll();
+        //参数返回页面
+        model.addAttribute("typeList",typeList);
+
+        return "watch/watch-refund-history";
+    }
 
     /**
      * 获取列表数据
@@ -65,6 +105,47 @@ public class WatchController {
         map.put("data",pageInfo.getList());
         return map;
     }
+
+    @RequestMapping("/watch/history/data.json")
+    @ResponseBody
+    public Map getWatchHistoryData(String watchname, Integer typeId, Integer brandId, Integer page, Integer limit) {
+        Map map = new HashMap();
+        List<Map> list=watchService.getHistoryListByKeys(watchname,typeId,brandId,page,limit);
+        PageInfo pageInfo=new PageInfo(list);
+        //封装返回接口
+        map.put("code","0");
+        map.put("msg","");
+        map.put("count",pageInfo.getTotal());
+        map.put("data",pageInfo.getList());
+        return map;
+    }
+    @RequestMapping("/watch/refuse/history/data.json")
+    @ResponseBody
+    public Map getRefuseWatchHistoryData(String watchname, Integer typeId, Integer brandId, Integer page, Integer limit) {
+        Map map = new HashMap();
+        List<Map> list=watchService.getRefuseHistoryListByKeys(watchname,typeId,brandId,page,limit);
+        PageInfo pageInfo=new PageInfo(list);
+        //封装返回接口
+        map.put("code","0");
+        map.put("msg","");
+        map.put("count",pageInfo.getTotal());
+        map.put("data",pageInfo.getList());
+        return map;
+    }
+    @RequestMapping("/watch/refund/history/data.json")
+    @ResponseBody
+    public Map getRefundWatchHistoryData(String watchname, Integer typeId, Integer brandId, Integer page, Integer limit) {
+        Map map = new HashMap();
+        List<Map> list=watchService.getRefundHistoryListByKeys(watchname,typeId,brandId,page,limit);
+        PageInfo pageInfo=new PageInfo(list);
+        //封装返回接口
+        map.put("code","0");
+        map.put("msg","");
+        map.put("count",pageInfo.getTotal());
+        map.put("data",pageInfo.getList());
+        return map;
+    }
+
 
     /**
      * 根据腕表类型查询腕表品牌列表
@@ -93,14 +174,16 @@ public class WatchController {
 
     /**
      * 拒绝维修手表
-     * @param id
+     * @param
      * @return
      */
     @RequestMapping("/watch/refuse")
     @ResponseBody
-    public String refuseWatch(Integer id) {
-        int result=watchService.refuseWatch(id);
-        if(result==1) {
+    public String refuseWatch(Integer watchId,String refusereason) {
+        int result=watchService.refuseWatch(watchId);
+        result+=watchService.insertWatchOrderForRefuse(watchId,refusereason,new Date());
+        System.out.println(result);
+        if(result==2) {
             return "ok";
         }else {
             return "error";
@@ -120,22 +203,28 @@ public class WatchController {
 
     /**
      * 保存腕表信息
-     * @param watch
+     * @param
      * @return
      */
     @RequestMapping("/watch/save")
     @ResponseBody
-    public String saveWatch(Watch watch){
+    public String saveWatch(String watchname, Integer type, Integer brand, String tel, String userAddress){
             //获取登录人修理腕表类型ID
             User user= (User) SessionUtil.getPrimaryPrincipal();
             //判断腕表是否已存在
-            Watch hasWatch=watchService.getWatchByWatchname(watch.getWatchname());
+            Watch hasWatch=watchService.getWatchByWatchname(watchname);
             if(hasWatch!=null){
                 return "exist";
             }
+            Watch watch=new Watch();
             //设置默认状态
             watch.setStatus(0);
             watch.setUserName(user.getRealname());
+            watch.setWatchname(watchname);
+            watch.setType(type);
+            watch.setBrand(brand);
+            watch.setUserTel(tel);
+            watch.setUserAddress(userAddress);
             int result=watchService.saveWatch(watch);
             if(result==1){
                 return "ok";
@@ -240,14 +329,14 @@ public class WatchController {
         if(array.length!=0){
             int result=watchService.updateWatchForPushFactory(array);
             if(result>0){
-                map.put("msg","成功下放"+array.length+"块腕表到修理厂，"+list.size()+"块腕表维修订单不在审核成功状态，不可下放");
+                map.put("msg","成功下放"+array.length+"块腕表到修理厂，"+list.size()+"块腕表维修订单不在可下放状态，不可下放");
                 map.put("code","ok");
                 return map;
             }
             map.put("code","error");
             return map;
         }
-        map.put("msg",list.size()+"块腕表维修订单不在审核成功状态，不可下放");
+        map.put("msg",list.size()+"块腕表维修订单不在可下放状态，不可下放");
         map.put("code","question");
         return map;
     }
@@ -281,7 +370,7 @@ public class WatchController {
             int result=watchService.payWatch(id);
             result+=userService.afterPay(user.getId(),fixprice);
             if(result==2){
-                map.put("msg","付款成功！您所剩余额："+userService.selectBalanceById(user.getId())+"元，腕表将尽快以您选中的方式到店。");
+                map.put("msg","付款成功！您所剩余额："+userService.selectBalanceById(user.getId())+"元。");
                 map.put("code","ok");
                 return map;
             }
@@ -305,19 +394,56 @@ public class WatchController {
     }
 
     /**
+     * 跳转到确认申请退款界面
+     * @return
+     */
+    @RequestMapping("/watch/checkrefundpage/{id}")
+    public String toCheckWatchRefundPageList(Model model,@PathVariable("id") String id){
+        OrderHistory orderHistory=watchService.getOrderHistoryByWatchId(id);
+        Watch watch=watchService.getWatchById(id);
+        model.addAttribute("watch",watch);
+        model.addAttribute("orderHistory",orderHistory);
+        return "watch/watch-checkrefund";
+    }
+
+    /**
      * 申请退款
      * @param id
      * @return
      */
-    @RequestMapping("/watch/refund")
+    @RequestMapping("/watch/startrefund")
     @ResponseBody
-    public Map refundWatch(Integer id,Integer fixprice) {
+    public Map startRefundWatch(Integer watchId,Integer fixprice,String refundreason) {
         Map map=new HashMap();
-        User user= (User) SessionUtil.getPrimaryPrincipal();
-        int result=userService.afterRefund(user.getId(),fixprice);
-        result += watchService.refuseWatch(id);
+        int result = watchService.startRefundWatch(watchId);
+        result+=watchService.insertWatchOrderForRefund(watchId,refundreason);
         if(result==2){
-            map.put("msg","退款成功！您所剩余额："+userService.selectBalanceById(user.getId())+"元");
+            map.put("msg","提交退款申请成功，请耐心等待总店回应");
+            map.put("code","ok");
+            return map;
+        }
+        map.put("code","error");
+        return map;
+    }
+
+    /**
+     * 申请退款
+     * @param id
+     * @return
+     */
+    @RequestMapping("/watch/checkrefund")
+    @ResponseBody
+    public Map checkRefundWatch(Integer watchId,Integer refundprice,Integer fixprice,String refundreason) {
+        Map map=new HashMap();
+        if(refundprice>fixprice){
+            map.put("code","question");
+            return map;
+        }
+        int result = watchService.checkRefundWatch(watchId);
+        result+=watchService.updateWatchOrderForRefund(watchId,refundreason,refundprice,new Date());
+        result+=userService.afterRefund(watchId,refundprice);
+        if(result==3){
+            map.put("msg","退款成功，已退回"+refundprice+"元");
             map.put("code","ok");
             return map;
         }

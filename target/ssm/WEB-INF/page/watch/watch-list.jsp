@@ -73,33 +73,42 @@
 <script src="${basePath}/js/lay-config.js?v=1.0.4" charset="utf-8"></script>
 <script type="text/html" id="statusBtn">
     {{# if(d.status=='0'){ }}
-    <button class="layui-btn layui-btn-xs layui-btn-danger" style="cursor:default" disabled>等待定价</button>
+    <button class="layui-btn layui-btn-xs layui-btn-danger" lay-event="status">待到店</button>
     {{# } }}
     {{# if(d.status=='1'){ }}
-    <button class="layui-btn layui-btn-xs layui-btn-normal" style="cursor:default" disabled>待付款</button>
+    <button class="layui-btn layui-btn-xs layui-btn-normal" lay-event="status">审核中</button>
     {{# } }}
     {{# if(d.status=='2'){ }}
-    <button class="layui-btn layui-btn-xs layui-btn-normal" lay-event="status">待接收</button>
+    <button class="layui-btn layui-btn-xs layui-btn-normal" style="cursor:default" disabled>审核完成</button>
     {{# } }}
     {{# if(d.status=='3'){ }}
-    <button class="layui-btn layui-btn-xs layui-btn-normal" lay-event="status">等待审核</button>
+    <button class="layui-btn layui-btn-xs layui-btn-normal" style="cursor:default" disabled>待付款</button>
     {{# } }}
     {{# if(d.status=='4'){ }}
-    <button class="layui-btn layui-btn-xs layui-btn-warm" style="cursor:default" disabled>审核成功</button>
+    <button class="layui-btn layui-btn-xs layui-btn-warm" style="cursor:default" disabled>已拒绝</button>
     {{# } }}
     {{# if(d.status=='5'){ }}
-    <button class="layui-btn layui-btn-xs layui-btn-warm" style="cursor:default" disabled>待维修</button>
+    <button class="layui-btn layui-btn-xs layui-btn-warm" style="cursor:default" disabled>已付款</button>
     {{# } }}
     {{# if(d.status=='6'){ }}
-    <button class="layui-btn layui-btn-xs layui-btn-warm" style="cursor:default" disabled>维修中</button>
+    <button class="layui-btn layui-btn-xs layui-btn-warm" lay-event="status">客户申请退款</button>
     {{# } }}
     {{# if(d.status=='7'){ }}
-    <button class="layui-btn layui-btn-xs layui-btn-warm" style="cursor:default" disabled>维修完成</button>
+    <button class="layui-btn layui-btn-xs layui-btn-warm" style="cursor:default" disabled>退款完成</button>
     {{# } }}
     {{# if(d.status=='8'){ }}
-    <button class="layui-btn layui-btn-xs layui-btn-warm" style="cursor:default" disabled>待收取</button>
+    <button class="layui-btn layui-btn-xs layui-btn-warm" style="cursor:default" disabled>待维修</button>
     {{# } }}
     {{# if(d.status=='9'){ }}
+    <button class="layui-btn layui-btn-xs layui-btn-warm" style="cursor:default" disabled>维修中</button>
+    {{# } }}
+    {{# if(d.status=='10'){ }}
+    <button class="layui-btn layui-btn-xs layui-btn-warm" style="cursor:default" disabled>维修完成</button>
+    {{# } }}
+    {{# if(d.status=='11'){ }}
+    <button class="layui-btn layui-btn-xs layui-btn-warm" style="cursor:default" disabled>寄回中</button>
+    {{# } }}
+    {{# if(d.status=='12'){ }}
     <button class="layui-btn layui-btn-xs layui-btn-warm" style="cursor:default" disabled>订单完成</button>
     {{# } }}
 </script>
@@ -140,7 +149,7 @@
             url: '${basePath}/store/watch/list/data.json',
             toolbar: '#toolbarDemo',
             defaultToolbar: ['filter', 'exports', 'print',{
-                title:'导出运行中订单',
+                title:'导出当前列表运行中订单',
                 layEvent:'template',
                 icon:'layui-icon-template-1'
             }],
@@ -293,28 +302,35 @@
             //layer.alert(data.watchname)
 
             if (obj.event === 'setprice') {
-                if(data.fixprice==null){
-                    var index = layer.open({
-                        title: '维修定价',
-                        type: 2,
-                        shade: 0.2,
-                        maxmin:true,
-                        shadeClose: false,
-                        area: ['35%', '80%'],
-                        content: '${basePath}/store/watch/setprice/'+data.id,
-                    });
-                    $(window).on("resize", function () {
-                        layer.full(index);
-                    });
-                    return false;
+                if(data.status==2){
+                    if(data.fixprice==null){
+                        var index = layer.open({
+                            title: '维修定价',
+                            type: 2,
+                            shade: 0.2,
+                            maxmin:true,
+                            shadeClose: false,
+                            area: ['35%', '80%'],
+                            content: '${basePath}/store/watch/setprice/'+data.id,
+                        });
+                        $(window).on("resize", function () {
+                            layer.full(index);
+                        });
+                        return false;
+                    }else{
+                        layer.alert("不能对订单重定价",function (){
+                            window.location.reload();
+                            layer.close(index);
+                        })
+                    }
                 }else{
-                    layer.alert("已经完成定价，不可重定价",function (){
+                    layer.alert("当前状态不可定价",function (){
                         window.location.reload();
                         layer.close(index);
                     })
                 }
             }else if (obj.event === 'refuse') {
-                if(data.status==4){
+                if(data.status==2){
                     var index = layer.open({
                         title: '拒绝维修腕表',
                         type: 2,
@@ -336,7 +352,7 @@
                 }
 
             }else if (obj.event==='status'){
-                if (data.status=='3')
+                if (data.status=='1')
                 {
                     layer.confirm("确认进行审核吗",function (index){
                         $.ajax({
@@ -360,7 +376,7 @@
                         });
                     });
 
-                }else if(data.status=='2'){
+                }else if(data.status=='0'){
                     layer.confirm("确认接收腕表吗",function (index){
                         $.ajax({
                             type:"get",
@@ -381,6 +397,22 @@
                                 }
                             }
                         });
+                    });
+                }else if(data.status=='6'){
+                    layer.confirm("确认进入确认退款流程吗",function (index){
+                        var index = layer.open({
+                            title: '确认退款',
+                            type: 2,
+                            shade: 0.2,
+                            maxmin:true,
+                            shadeClose: false,
+                            area: ['35%', '80%'],
+                            content: '${basePath}/store/watch/checkrefundpage/'+data.id
+                        });
+                        $(window).on("resize", function () {
+                            layer.full(index);
+                        });
+                        return false;
                     });
                 }
             }

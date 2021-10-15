@@ -79,6 +79,8 @@
 				/login/verify = anon
 				/index.html = anon
 				/base.jsp = anon
+				/register = anon
+				/register/do = anon
 				<!--退出-->
 				/logout = logout
 				<!--其它资源要权限才能访问：跟记住密码有关  没有记住密码用authc-->

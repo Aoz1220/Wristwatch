@@ -104,6 +104,10 @@ public class IndexController {
     @ResponseBody
     public Map balanceUpdate(Integer money){
         Map map=new HashMap();
+        if(money>10000){
+            map.put("code","question");
+            return map;
+        }
         User user= (User) SessionUtil.getPrimaryPrincipal();
         int result=userService.updateUserBalance(user.getId(),money);
         if(result==1) {
