@@ -174,4 +174,16 @@ public class OrderController {
         map.put("data",pageInfo.getList());
         return map;
     }
+
+    @RequestMapping("/order/score")
+    @ResponseBody
+    public String scoreOrder(String watchname,String score) {
+       int result=watchService.scoreOrder(watchname,score);
+       if(result==1){
+           return "ok";
+       }else {
+           System.out.println(result);
+           return "error";
+       }
+    }
 }

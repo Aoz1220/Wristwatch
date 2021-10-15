@@ -24,14 +24,14 @@
             <label class="layui-form-label">申请退款理由*</label>
             <div class="layui-input-block">
 
-                <textarea placeholder="请输入退款理由" lay-verify="required" lay-reqtext="拒绝理由不能为空" class="layui-textarea"></textarea>
+                <textarea name="refundreason" id="refundreason" placeholder="请输入退款理由" lay-verify="required" lay-reqtext="拒绝理由不能为空" class="layui-textarea"></textarea>
             </div>
         </div>
         <div class="layui-form-item">
             <div class="layui-input-block">
-                <input  type="hidden" name="id" value="${watch.id}">
+                <input  type="hidden" name="watchId" id="watchId" value="${watch.id}">
                 <input  type="hidden" name="fixprice" value="${watch.fixprice}">
-                <button class="layui-btn layui-btn-normal" lay-submit lay-filter="saveBtn">确认退款</button>
+                <button class="layui-btn layui-btn-normal" lay-submit lay-filter="saveBtn">确认申请退款</button>
             </div>
         </div>
     </form>
@@ -49,13 +49,14 @@
             layer.confirm('真的退款吗？', function (index) {
                 $.ajax({
                     type:"post",
-                    url:"${basePath}/store/watch/refund",
+                    url:"${basePath}/store/watch/startrefund",
                     data:data.field,
                     dataType:"json",
                     success:function(data){
                         if(data.code=="error"){
-                            layer.alert("退款失败!",function(){
-
+                            layer.alert("退款申请提交失败!",function(){
+                                window.location.reload();
+                                layer.close(index);
                             });
                         }else if(data.code=="ok"){
                             layer.alert(data.msg,function(){

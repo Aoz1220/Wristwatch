@@ -16,6 +16,10 @@ public class OrderHistory {
 
     private String refuseReason;
 
+    private String score;
+
+    private Date scoreTime;
+
     public Integer getId() {
         return id;
     }
@@ -62,5 +66,21 @@ public class OrderHistory {
 
     public void setRefuseReason(String refuseReason) {
         this.refuseReason = refuseReason;
+    }
+
+    public String getScore() {
+        return score;
+    }
+
+    public void setScore(String score) {
+        this.score = score;
+    }
+
+    public Date getScoreTime() {
+        return scoreTime;
+    }
+
+    public void setScoreTime(Date scoreTime) {
+        this.scoreTime = scoreTime;
     }
 }

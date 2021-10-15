@@ -1,8 +1,9 @@
 package com.hs.mapper;
 
 import com.hs.model.OrderHistory;
-import com.hs.model.Watch;
 import org.apache.ibatis.annotations.Param;
+
+import java.util.Date;
 
 public interface OrderHistoryMapper {
     int deleteByPrimaryKey(Integer id);
@@ -24,4 +25,6 @@ public interface OrderHistoryMapper {
     OrderHistory selectByWatchId(String id);
 
     int updateWatchOrderForRefund(OrderHistory record);
+
+    int scoreOrder(@Param("watchname") String watchname, @Param("score") String score, @Param("scoretime") Date scoretime);
 }

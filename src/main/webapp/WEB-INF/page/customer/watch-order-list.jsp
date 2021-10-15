@@ -326,6 +326,7 @@
                                 }else if(data=="ok"){
                                     layer.alert("收货成功!",function(){
                                         layer.closeAll();
+                                        window.location.reload();
                                     });
                                 }
                             }
