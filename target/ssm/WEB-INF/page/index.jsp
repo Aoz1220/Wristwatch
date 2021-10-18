@@ -5,7 +5,7 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>layuimini-iframe版 v2 - 基于Layui的后台管理系统前端模板</title>
+    <title>腕表修理系统</title>
     <meta name="keywords" content="layuimini,layui,layui模板,layui后台,后台模板,admin,admin模板,layui mini">
     <meta name="description" content="layuimini基于layui的轻量级前端后台管理框架，最简洁、易用的后台框架模板，面向所有层次的前后端程序,只需提供一个接口就直接初始化整个框架，无需复杂操作。">
     <meta name="renderer" content="webkit">
@@ -25,6 +25,26 @@
     <script src="https://cdn.staticfile.org/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
     <style id="layuimini-bg-color">
+
+    </style>
+    <style>
+        .container { position:relative; }
+        .container video {
+            position:relative;
+            z-index:0;
+        }
+        .overlay {
+            position:absolute;
+            top:20px;
+            left:150px;
+            z-index:1;
+        }
+        .overlay1 {
+            position:absolute;
+            top:60px;
+            left:95px;
+            z-index:1;
+        }
     </style>
 </head>
 <body class="layui-layout-body layuimini-all">
@@ -128,7 +148,19 @@
                 </li>
             </div>
             <div class="layui-tab-content">
-                <div id="layuiminiHomeTabIframe" class="layui-tab-item layui-show"></div>
+                <div id="" class="layui-tab-item layui-show">
+                    <div class="container">
+                        <video id="video" controls src="images/index.mp4" style="width: 100%; height:100%; object-fit: fill" autoplay="autoplay">
+
+                        </video>
+                        <div  class="overlay">
+                            <h1 style="color: white">欢迎使用</h1>
+                        </div>
+                        <div  class="overlay1">
+                            <h1 style="color: white">雄鹰腕表修理系统</h1>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
 
