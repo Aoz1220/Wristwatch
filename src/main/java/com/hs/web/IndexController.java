@@ -102,13 +102,16 @@ public class IndexController {
      */
     @RequestMapping("/balanceupdate")
     @ResponseBody
+
     public Map balanceUpdate(Integer money){
         Map map=new HashMap();
         if(money>10000){
             map.put("code","question");
             return map;
         }
+        //获取当前登录用户信息
         User user= (User) SessionUtil.getPrimaryPrincipal();
+        //在数据库中给当前用户加钱
         int result=userService.updateUserBalance(user.getId(),money);
         if(result==1) {
             map.put("msg","充值成功！您所剩余额："+userService.selectBalanceById(user.getId())+"元");

@@ -39,7 +39,6 @@ public class ExcelUtils {
                 .registerConverter(new TypeConverter())//注册类型转换器
                 .registerConverter(new BrandConverter())//注册品牌转换器
                 .registerConverter(new StatusConverter())//注册品牌转换器
-
                 .head(Watch.class) //指定头
                 .withTemplate(path) //加载模板
                 .build(); //构造write对象

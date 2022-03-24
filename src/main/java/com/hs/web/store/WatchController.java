@@ -365,9 +365,12 @@ public class WatchController {
     @ResponseBody
     public Map payWatch(Integer id,Integer fixprice){
         Map map=new HashMap();
+        //利用shiro获取当前登录用户信息
         User user= (User) SessionUtil.getPrimaryPrincipal();
         if(user.getBalance()>fixprice){
+            //将表的状态改为已付款
             int result=watchService.payWatch(id);
+            //将刚刚在网页上付的款在数据库用户的余额里减掉
             result+=userService.afterPay(user.getId(),fixprice);
             if(result==2){
                 map.put("msg","付款成功！您所剩余额："+userService.selectBalanceById(user.getId())+"元。");

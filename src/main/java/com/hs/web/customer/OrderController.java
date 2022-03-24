@@ -76,7 +76,9 @@ public class OrderController {
     @RequestMapping("/watch/receive")
     @ResponseBody
     public String watchReceive(Integer id){
+        //将腕表状态从待接收改为订单完成
         int result=watchService.updateWatchForReceive(id);
+        //将订单信息更新，完成订单时间等
         result+=watchService.updateWatchOrderForEnd(id,new Date());
         if(result==2){
             return "ok";
